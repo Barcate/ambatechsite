@@ -23,12 +23,11 @@ a {
     color: #007bff; /* Azul primário */
 }
 
-/* ESTILOS DO CABEÇALHO (Adicionado borda laranja de destaque) */
 header {
     background-color: #ffffff;
+    border-bottom: 4px solid #ec6246;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 15px 0;
-    border-bottom: 4px solid #FF6B00; /* Detahe de borda laranja */
 }
 
 header .container {
@@ -50,29 +49,31 @@ nav a {
 }
 
 nav a:hover {
-    color: #FF6B00; /* Hover laranja */
+    color: #ec6246;
 }
 
 .cta-button {
-    background-color: #FF6B00; /* CTA principal laranja */
+    background-color: #ec6246; /* CTA principal laranja */
     color: white !important;
     padding: 8px 15px;
     border-radius: 4px; /* Cantos levemente mais quadrados */
     font-weight: bold;
     transition: background-color 0.3s;
 }
+
 .cta-button:hover {
-    background-color: #e06000;
+    background-color: #e5672c;
 }
 
 
 /* ESTILOS DO HERO (Fundo Azul Escuro Sólido) */
 .hero-section {
-    background-color: #1F2E4A; /* Azul escuro tech */
-    color: white;
+    background: linear-gradient(135deg, #4f297c, #460d5e);
+    color: #ffffff;
     padding: 120px 0; /* Aumentado o padding vertical */
     text-align: center;
 }
+
 
 .hero-section h2 {
     font-size: 3em;
@@ -90,7 +91,7 @@ nav a:hover {
 
 .main-cta {
     display: inline-block;
-    background-color: #FF6B00; /* CTA laranja */
+    background-color: #ec6246; /* CTA laranja */
     color: white;
     padding: 15px 30px;
     border-radius: 4px;
@@ -100,7 +101,7 @@ nav a:hover {
 }
 
 .main-cta:hover {
-    background-color: #e06000;
+    background-color: #f48131;
 }
 
 /* ESTILOS DA SEÇÃO DE PROJETOS */
@@ -130,9 +131,6 @@ nav a:hover {
     border-radius: 6px; 
     box-shadow: 0 6px 15px rgba(31, 46, 74, 0.1); /* Sombra mais forte */
     
-    /* Detalhe técnico: borda superior em azul primário */
-    border-top: 5px solid #007BFF;
-    
     /* Força 100% de largura para empilhar os cards (melhor para iframes) */
     flex: 1 1 100%; 
     margin-bottom: 30px; 
@@ -140,10 +138,15 @@ nav a:hover {
     min-width: 280px; 
     text-align: left;
     transition: transform 0.3s;
+    border-top: 5px solid #4f297c;
 }
 
 .project-card:hover {
     transform: translateY(-5px);
+}
+
+.project-card:nth-child(even) {
+    border-top-color: #ec6246;
 }
 
 .project-card h4 {

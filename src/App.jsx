@@ -1,0 +1,336 @@
+import { useState } from 'react'
+
+export default function App() {
+  // Estado para controlar o menu mobile
+  const [isMenuOpen, setIsOpen] = useState(false);
+
+  // Função para fechar o menu ao clicar em links
+  const closeMenu = () => setIsOpen(false);
+
+  return (
+    <div className="min-h-screen bg-dark-bg text-white">
+      {/* CABEÇALHO */}
+      <header className="sticky top-0 z-50 bg-dark-bg/70 backdrop-blur-xl border-b border-white/5">
+        <div className="container mx-auto flex justify-between items-center p-4">
+          <a href="#" className="flex items-center gap-3 group">
+            <img 
+              src="/images/logo.png" 
+              alt="Símbolo AmbaTech"
+              className="h-10 w-auto group-hover:rotate-12 transition-transform" 
+            />
+            <span className="flex text-2xl font-black tracking-tighter italic">
+              <span className="text-brand-orange-light">AMBA</span>
+              <span className="text-brand-purple">TECH</span>
+            </span>
+          </a>
+
+          {/* Nav Desktop */}
+          <nav className="hidden md:flex space-x-8 items-center">
+            <a href="#inicio" className="text-sm font-medium hover:text-brand-primary transition-colors">Início</a>
+            <a href="#quem-somos" className="text-sm font-medium hover:text-brand-primary transition-colors">Quem Somos</a>
+            <a href="#trabalhos" className="text-sm font-medium hover:text-brand-primary transition-colors">Nossos Trabalhos</a>
+            <a href="#contato"
+              className="bg-brand-primary hover:bg-brand-orange-dark text-white text-sm font-bold px-5 py-2.5 rounded-full shadow-lg shadow-brand-primary/20 transition-all hover:-translate-y-0.5">
+              Iniciar Projeto
+            </a>
+          </nav>
+
+          {/* Botão Mobile */}
+          <button 
+            onClick={() => setIsOpen(!isMenuOpen)}
+            className="md:hidden p-2 text-white hover:bg-white/10 rounded-lg"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              {isMenuOpen ? (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+              ) : (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
+              )}
+            </svg>
+          </button>
+        </div>
+
+        {/* Menu Mobile (Nav condicional) */}
+        {isMenuOpen && (
+          <div className="md:hidden flex flex-col absolute top-full left-0 w-full bg-dark-bg border-t border-dark-border p-4 space-y-4 animate-in fade-in slide-in-from-top-2">
+            <a href="#inicio" onClick={closeMenu} className="block hover:text-brand-primary">Início</a>
+            <a href="#quem-somos" onClick={closeMenu} className="block hover:text-brand-primary">Quem Somos</a>
+            <a href="#trabalhos" onClick={closeMenu} className="block hover:text-brand-primary">Nossos Trabalhos</a>
+            <a href="#contato" onClick={closeMenu} className="block text-brand-primary font-bold">Entre em Contato</a>
+          </div>
+        )}
+      </header>
+
+      <main>
+        {/* SEÇÃO INÍCIO (HERO) */}
+        <section id="inicio" className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-grid-pattern">
+          <div className="absolute top-1/4 -left-20 w-96 h-96 bg-brand-primary/10 blur-[120px] rounded-full"></div>
+          <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-brand-purple/10 blur-[120px] rounded-full"></div>
+
+          <div className="container mx-auto text-center px-4 relative z-10">
+            <span className="inline-block py-1 px-3 rounded-full bg-white/5 border border-white/10 text-brand-orange-light text-xs font-bold tracking-widest uppercase mb-6">
+              Inovação & Performance
+            </span>
+            <h1 className="text-5xl md:text-7xl font-black text-white leading-[1.1] mb-6 tracking-tighter">
+              Transformamos Ideias em <br />
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-brand-orange-light via-brand-primary to-brand-purple">
+                Experiências Digitais
+              </span>
+            </h1>
+            <p className="max-w-2xl mx-auto text-lg md:text-xl text-gray-400 mb-10 leading-relaxed">
+              Unimos design de ponta e tecnologia robusta para acelerar o crescimento do seu negócio no mundo digital.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a href="#contato" className="bg-brand-primary hover:bg-brand-orange-dark text-white font-bold py-4 px-10 rounded-xl text-lg shadow-2xl shadow-brand-primary/30 transition-all hover:scale-105">
+                Vamos Conversar
+              </a>
+              <a href="#trabalhos" className="bg-white/5 hover:bg-white/10 text-white font-bold py-4 px-10 rounded-xl text-lg border border-white/10 transition-all">
+                Ver Portfólio
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* SEÇÃO NOSSOS SERVIÇOS */}
+        <section id="servicos" className="py-24 bg-dark-card border-y border-dark-border relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-brand-purple/10 via-transparent to-brand-orange-light/10 pointer-events-none"></div>
+
+          <div className="container mx-auto px-4 relative z-10">
+            <div className="text-center max-w-3xl mx-auto mb-16">
+              <h2 className="text-3xl md:text-4xl font-black text-white mb-4">Nossos Serviços</h2>
+              <p className="text-gray-400 text-lg">
+                Criamos soluções digitais que unem estratégia, design e tecnologia para gerar resultados reais e duradouros.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {/* Card 1 */}
+              <div className="group relative bg-dark-card border border-white/5 rounded-2xl p-8 hover:border-brand-primary/50 transition-all duration-500">
+                <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
+                <div className="relative z-10">
+                  <div className="w-14 h-14 bg-brand-primary/10 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg shadow-brand-primary/10">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-brand-orange-light" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-2xl font-bold text-white mb-4">Landing Pages</h3>
+                  <p className="text-gray-400 mb-6 text-sm leading-relaxed">Focadas em conversão imediata, ideais para campanhas de tráfego pago e lançamentos de produtos.</p>
+                  <ul className="space-y-3 mb-8">
+                    <li className="flex items-center text-sm text-gray-300"><span className="text-brand-primary mr-2">✓</span> Design estratégico</li>
+                    <li className="flex items-center text-sm text-gray-300"><span className="text-brand-primary mr-2">✓</span> Otimização para SEO</li>
+                    <li className="flex items-center text-sm text-gray-300"><span className="text-brand-primary mr-2">✓</span> Mobile First</li>
+                  </ul>
+                  <a href="#contato" className="inline-flex items-center font-bold text-brand-orange-light hover:gap-2 transition-all">
+                    Solicitar orçamento <span className="ml-1">→</span>
+                  </a>
+                </div>
+              </div>
+
+              {/* Card 2 */}
+              <div className="group relative bg-dark-card border border-white/5 rounded-2xl p-8 hover:border-brand-purple/50 transition-all duration-500">
+                <div className="absolute inset-0 bg-gradient-to-br from-brand-purple/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
+                <div className="relative z-10">
+                  <div className="w-14 h-14 bg-brand-purple/10 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg shadow-brand-purple/10">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-brand-purple" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-2xl font-bold text-white mb-4">Portfólio Profissional</h3>
+                  <p className="text-gray-400 mb-6 text-sm leading-relaxed">Sites elegantes para fortalecer sua autoridade e apresentar seus projetos com máxima credibilidade.</p>
+                  <ul className="space-y-3 mb-8">
+                    <li className="flex items-center text-sm text-gray-300"><span className="text-brand-purple mr-2">✓</span> Identidade Visual Única</li>
+                    <li className="flex items-center text-sm text-gray-300"><span className="text-brand-purple mr-2">✓</span> Galeria Dinâmica</li>
+                    <li className="flex items-center text-sm text-gray-300"><span className="text-brand-purple mr-2">✓</span> Performance Veloz</li>
+                  </ul>
+                  <a href="#contato" className="inline-flex items-center font-bold text-brand-orange-light hover:gap-2 transition-all">
+                    Solicitar orçamento <span className="ml-1">→</span>
+                  </a>
+                </div>
+              </div>
+
+              {/* Card 3 */}
+              <div className="group relative bg-dark-card border border-white/5 rounded-2xl p-8 hover:border-brand-magenta/50 transition-all duration-500">
+                <div className="absolute inset-0 bg-gradient-to-br from-brand-magenta/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
+                <div className="relative z-10">
+                  <div className="w-14 h-14 bg-brand-magenta/10 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg shadow-brand-magenta/10">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-brand-magenta" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+                    </svg>
+                  </div>
+                  <h3 className="text-2xl font-bold text-white mb-4">UX / UI Design</h3>
+                  <p className="text-gray-400 mb-6 text-sm leading-relaxed">Projetamos interfaces centradas no usuário, garantindo uma navegação intuitiva e inesquecível.</p>
+                  <ul className="space-y-3 mb-8">
+                    <li className="flex items-center text-sm text-gray-300"><span className="text-brand-magenta mr-2">✓</span> Prototipagem em Figma</li>
+                    <li className="flex items-center text-sm text-gray-300"><span className="text-brand-magenta mr-2">✓</span> Jornada do Usuário</li>
+                    <li className="flex items-center text-sm text-gray-300"><span className="text-brand-magenta mr-2">✓</span> Design System</li>
+                  </ul>
+                  <a href="#contato" className="inline-flex items-center font-bold text-brand-orange-light hover:gap-2 transition-all">
+                    Solicitar orçamento <span className="ml-1">→</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* SEÇÃO NOSSOS TRABALHOS */}
+        <section id="trabalhos" className="py-24 bg-dark-bg border-y border-dark-border relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-b from-white/[0.02] via-transparent to-black/40 pointer-events-none"></div>
+
+          <div className="container mx-auto px-4 relative z-10">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">
+                Nosso <span className="text-brand-primary">Portfólio</span>
+              </h2>
+              <p className="text-gray-400">Uma amostra do que podemos construir para você.</p>
+            </div>
+
+            <div className="space-y-20">
+              {/* Projeto 1 */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+                <div className="order-2 lg:order-1 group bg-dark-card border border-white/5 rounded-2xl overflow-hidden shadow-2xl transition-all duration-500 hover:border-brand-primary/30">
+                  <div className="bg-neutral-800/50 px-4 py-3 border-b border-white/5 flex items-center gap-2">
+                    <div className="flex gap-1.5">
+                      <div className="w-3 h-3 rounded-full bg-red-500/50"></div>
+                      <div className="w-3 h-3 rounded-full bg-yellow-500/50"></div>
+                      <div className="w-3 h-3 rounded-full bg-green-500/50"></div>
+                    </div>
+                    <div className="mx-auto bg-black/20 rounded-md px-3 py-1 text-[10px] text-gray-500 font-mono w-1/2 text-center">
+                      faiskapressao.com
+                    </div>
+                  </div>
+                  <div className="relative overflow-hidden aspect-video">
+                    <img src="images/projeto-raissa.png" alt="Projeto Raissa" className="w-full h-full object-cover object-top group-hover:scale-105 transition-all duration-700" />
+                    <div className="absolute inset-0 bg-brand-purple/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                      <a href="https://faiskapressao.com" target="_blank" rel="noreferrer" className="bg-white text-brand-purple px-6 py-2 rounded-full font-bold">Ver Site Oficial</a>
+                    </div>
+                  </div>
+                </div>
+                <div className="order-1 lg:order-2 space-y-4">
+                  <span className="text-brand-primary font-bold tracking-widest text-xs uppercase">Web Design / Art</span>
+                  <h3 className="text-3xl font-black text-white">Portfólio Artístico: Raíssa Alves</h3>
+                  <p className="text-gray-400 leading-relaxed">Um site minimalista e focado na estética visual, desenvolvido para destacar obras de arte com alta performance e elegância.</p>
+                </div>
+              </div>
+
+              {/* Projeto 2 */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+                <div className="space-y-4">
+                  <span className="text-brand-orange-light font-bold tracking-widest text-xs uppercase">Landing Page / Business</span>
+                  <h3 className="text-3xl font-black text-white">Academia de Muay Thai</h3>
+                  <p className="text-gray-400 leading-relaxed">Página de conversão estratégica criada para captação de novos alunos, com integração de formulários e design agressivo e moderno.</p>
+                </div>
+                <div className="group bg-dark-card border border-white/5 rounded-2xl overflow-hidden shadow-2xl transition-all duration-500 hover:border-brand-orange-light/30">
+                  <div className="bg-neutral-800/50 px-4 py-3 border-b border-white/5 flex items-center gap-2">
+                    <div className="flex gap-1.5">
+                      <div className="w-3 h-3 rounded-full bg-red-500/50"></div>
+                      <div className="w-3 h-3 rounded-full bg-yellow-500/50"></div>
+                      <div className="w-3 h-3 rounded-full bg-green-500/50"></div>
+                    </div>
+                    <div className="mx-auto bg-black/20 rounded-md px-3 py-1 text-[10px] text-gray-500 font-mono w-1/2 text-center">
+                      laura.github.io/muay-thai
+                    </div>
+                  </div>
+                  <div className="relative overflow-hidden aspect-video">
+                    <img src="images/muay-thai-thumb.png" alt="Muay Thai" className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700" />
+                    <div className="absolute inset-0 bg-brand-orange-dark/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                      <a href="https://laurafercordeiro.github.io/Muay-Thai/index.html" target="_blank" rel="noreferrer" className="bg-white text-brand-orange-dark px-6 py-2 rounded-full font-bold">Ver Projeto</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Projeto 3 (Vídeo) */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+                <div className="order-2 lg:order-1 group bg-dark-card border border-white/5 rounded-2xl overflow-hidden shadow-2xl transition-all duration-500">
+                  <div className="bg-neutral-800/80 px-4 py-3 flex items-center justify-between border-b border-white/5">
+                    <span className="text-[10px] text-gray-400 font-bold tracking-widest uppercase">Video Showcase</span>
+                    <div className="flex gap-1">
+                      <div className="w-2 h-2 rounded-full bg-white/20"></div>
+                      <div className="w-2 h-2 rounded-full bg-white/20"></div>
+                    </div>
+                  </div>
+                  <div className="relative aspect-video bg-black">
+                    <video className="w-full h-full object-cover" controls autoPlay muted loop>
+                      <source src="/video/video.mp4" type="video/mp4" />
+                    </video>
+                  </div>
+                </div>
+                <div className="order-1 lg:order-2 space-y-4">
+                  <span className="text-brand-magenta font-bold tracking-widest text-xs uppercase">E-Commerce / Full Stack</span>
+                  <h3 className="text-3xl font-black text-white">Site Institucional: Tearti</h3>
+                  <p className="text-gray-400 leading-relaxed">Demonstração de uma plataforma completa de comércio eletrônico, com sistema de catálogo e interface focada na experiência de compra.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* SEÇÃO CONTATO */}
+        <section id="contato" className="py-24 relative overflow-hidden">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-brand-primary/10 blur-[100px] rounded-full pointer-events-none"></div>
+
+          <div className="container mx-auto px-4 relative z-10">
+            <div className="max-w-3xl mx-auto text-center mb-12">
+              <h2 className="text-4xl md:text-5xl font-black text-white mb-4 tracking-tighter">
+                Vamos <span className="ml-2 text-brand-primary">Conversar?</span>
+              </h2>
+              <p className="text-gray-400 text-lg">
+                Estamos prontos para ouvir sobre sua próxima grande ideia. <br className="hidden md:block" />
+                Preencha o formulário e retornaremos em breve.
+              </p>
+            </div>
+
+            <div className="max-w-2xl mx-auto">
+              <form action="https://api.web3forms.com/submit" method="POST" className="bg-dark-card/40 backdrop-blur-xl border border-white/5 p-8 md:p-12 rounded-[2rem] shadow-2xl relative">
+                <input type="hidden" name="access_key" value="55fed33c-2c36-489a-8e94-a7dcc614d2ef" />
+                <input type="hidden" name="from_name" value="AmbaTech Contato" />
+                <input type="hidden" name="subject" value="Novo Orçamento via Site" />
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                  <div className="space-y-2">
+                    <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em] ml-1">Nome</label>
+                    <input type="text" name="name" required placeholder="Seu nome"
+                      className="w-full bg-black/20 border border-white/10 rounded-2xl p-4 text-white placeholder:text-gray-700 focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary outline-none transition-all duration-300 hover:border-white/20" />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em] ml-1">Email</label>
+                    <input type="email" name="email" required placeholder="seu@email.com"
+                      className="w-full bg-black/20 border border-white/10 rounded-2xl p-4 text-white placeholder:text-gray-700 focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary outline-none transition-all duration-300 hover:border-white/20" />
+                  </div>
+                </div>
+
+                <div className="space-y-2 mb-8">
+                  <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em] ml-1">Mensagem</label>
+                  <textarea name="message" rows="5" required placeholder="Como podemos ajudar no seu projeto?"
+                    className="w-full bg-black/20 border border-white/10 rounded-2xl p-4 text-white placeholder:text-gray-700 focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary outline-none transition-all duration-300 hover:border-white/20 resize-none"></textarea>
+                </div>
+
+                <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} />
+
+                <div className="relative group">
+                  <div className="absolute -inset-0.5 bg-gradient-to-r from-brand-orange-light to-brand-primary rounded-2xl blur opacity-20 group-hover:opacity-50 transition duration-500"></div>
+                  <button type="submit"
+                    className="relative w-full bg-gradient-to-r from-brand-orange-light to-brand-primary text-white font-black py-5 rounded-2xl text-lg tracking-wide shadow-xl transition-all duration-300 transform group-hover:scale-[1.01] active:scale-[0.98]">
+                    Enviar Mensagem
+                  </button>
+                </div>
+
+                <p className="text-center text-gray-600 text-[10px] mt-6 uppercase tracking-widest font-medium">
+                  Resposta em menos de 24 horas úteis
+                </p>
+              </form>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      {/* RODAPÉ */}
+      <footer className="bg-dark-card border-t border-dark-border">
+        <div className="container mx-auto text-center p-6">
+          <p className="text-gray-400">&copy; 2025 AmbaTech. Todos os direitos reservados.</p>
+        </div>
+      </footer>
+    </div>
+  )
+}

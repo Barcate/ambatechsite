@@ -1,14 +1,104 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import Lenis from '@studio-freight/lenis'; 
 
 export default function App() {
-  // Estado para controlar o menu mobile
   const [isMenuOpen, setIsOpen] = useState(false);
-
-  // Função para fechar o menu ao clicar em links
+  const [categoriaAtiva, setCategoriaAtiva] = useState('Funcionamento');
+  const [perguntaAberta, setPerguntaAberta] = useState(null);
   const closeMenu = () => setIsOpen(false);
 
+  // REFS (Inicializadas com null para o React)
+  const mainContainer = useRef(null); 
+  const introOverlayRef = useRef(null); 
+  const introLogoRef = useRef(null);   
+  const heroContentRef = useRef(null);  
+
+  // SMOOTH SCROLL (Lenis com Cleanup)
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    
+    requestAnimationFrame(raf);
+
+    // Limpeza essencial ao desmontar o componente
+    return () => {
+      lenis.destroy();
+    };
+  }, []);
+
+  const dadosFaq = {
+    'Funcionamento': [
+      {q: "Como funciona o processo de desenvolvimento?", a: "Nosso processo é dividido em etapas claras: Briefing, Design, Desenvolvimento e Lançamento."},
+      {q: "Eu acompanho o Projeto?", a: "Sim. Mantemos contato constante via WhatsApp ou Email com atualizações semanais."},
+      {q: "Posso pedir ajustes durante o projeto?", a: "Sim. Ajustes fazem parte do processo e temos rodadas de revisão específicas."},
+      {q: "Em quanto tempo o projeto fica pronto?", a: "O prazo varia conforme o tipo, geralmente entre 15 a 45 dias." }
+    ],
+    'Serviços e resultados': [
+      {q: "Qual a diferença entre landing page, portfólio e UI/UX?", a: "Landing pages convertem, portfólios apresentam e UI/UX foca na experiência de uso."},
+      {q: "As landing pages são focadas em conversão?", a: "Sim. Usamos gatilhos mentais e design estratégico para vender mais."},
+      {q: "O site funciona bem em dispositivos móveis?", a: "Sim. Desenvolvemos com mentalidade Mobile First."},
+      {q: "Posso usar o projeto com outro desenvolvedor depois?", a: "Sim. O código é seu após a entrega final."}
+    ],
+    'Preço e contrato': [
+      {q: "Como funciona o orçamento?", a: "O orçamento é personalizado baseada na complexidade do seu projeto."},
+      {q: "O que está incluso no valor do projeto?", a: "Design, programação, configuração de domínio e suporte inicial."},
+      {q: "Existe contrato?", a: "Sim. Trabalhamos com contrato para garantir segurança para ambas as partes."},
+      {q: "É possível parcelar o pagamento?", a: "Sim. Oferecemos condições flexíveis no cartão ou Pix parcelado."}
+    ],
+    'Suporte': [
+      {q: "Vocês oferecem suporte após a entrega?", a: "Sim. Oferecemos 30 dias de suporte gratuito para bugs."},
+      {q: "O que acontece se eu encontrar algum problema depois?", a: "Se for erro de código nosso, corrigimos sem custo."},
+      {q: "Vocês fazem manutenção ou melhorias futuras?", a: "Sim. Podem ser contratadas via pacotes de horas ou mensalidade."},
+      {q: "Posso contratar novos serviços depois?", a: "Claro. Muitos clientes evoluem de Landing Pages para E-commerces."}
+    ]
+  };
+  
+  const categorias = Object.keys(dadosFaq);
+
+  // ANIMAÇÃO GSAP
+  useGSAP(() => {
+    const tl = gsap.timeline({
+      defaults: { ease: "expo.inOut" }
+    });
+
+    // Estado inicial
+    gsap.set(heroContentRef.current, { opacity: 0, y: 100 });
+
+    tl.from(introLogoRef.current, {
+      opacity: 0,
+      scale: 0.5,
+      duration: 1.2
+    })
+    .to(introLogoRef.current, {
+      scale: 80, 
+      duration: 2,
+      delay: 0.2 
+    })
+    .to(introOverlayRef.current, {
+      autoAlpha: 0,
+      duration: 1
+    }, "-=1.5")
+    .to(heroContentRef.current, {
+      opacity: 1,
+      y: 0,
+      duration: 1.5,
+      ease: "power4.out" 
+    }, "-=1");
+
+  }, { scope: mainContainer });
+
   return (
-    <div className="min-h-screen bg-dark-bg text-white">
+    <div className="min-h-screen bg-dark-bg text-white font-sans selection:bg-brand-primary selection:text-white">
       {/* CABEÇALHO */}
       <header className="sticky top-0 z-50 bg-dark-bg/70 backdrop-blur-xl border-b border-white/5">
         <div className="container mx-auto flex justify-between items-center p-4">
@@ -27,7 +117,7 @@ export default function App() {
           {/* Nav Desktop */}
           <nav className="hidden md:flex space-x-8 items-center">
             <a href="#inicio" className="text-sm font-medium hover:text-brand-primary transition-colors">Início</a>
-            <a href="#quem-somos" className="text-sm font-medium hover:text-brand-primary transition-colors">Quem Somos</a>
+            <a href="#servicos" className="text-sm font-medium hover:text-brand-primary transition-colors">Serviços</a>
             <a href="#trabalhos" className="text-sm font-medium hover:text-brand-primary transition-colors">Nossos Trabalhos</a>
             <a href="#contato"
               className="bg-brand-primary hover:bg-brand-orange-dark text-white text-sm font-bold px-5 py-2.5 rounded-full shadow-lg shadow-brand-primary/20 transition-all hover:-translate-y-0.5">
@@ -50,287 +140,226 @@ export default function App() {
           </button>
         </div>
 
-        {/* Menu Mobile (Nav condicional) */}
+        {/* Menu Mobile */}
         {isMenuOpen && (
-          <div className="md:hidden flex flex-col absolute top-full left-0 w-full bg-dark-bg border-t border-dark-border p-4 space-y-4 animate-in fade-in slide-in-from-top-2">
+          <div className="md:hidden flex flex-col absolute top-full left-0 w-full bg-dark-bg border-t border-dark-border p-4 space-y-4 shadow-2xl">
             <a href="#inicio" onClick={closeMenu} className="block hover:text-brand-primary">Início</a>
-            <a href="#quem-somos" onClick={closeMenu} className="block hover:text-brand-primary">Quem Somos</a>
+            <a href="#servicos" onClick={closeMenu} className="block hover:text-brand-primary">Serviços</a>
             <a href="#trabalhos" onClick={closeMenu} className="block hover:text-brand-primary">Nossos Trabalhos</a>
             <a href="#contato" onClick={closeMenu} className="block text-brand-primary font-bold">Entre em Contato</a>
           </div>
         )}
       </header>
 
-      <main>
-        {/* SEÇÃO INÍCIO (HERO) */}
-        <section id="inicio" className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-grid-pattern">
-          <div className="absolute top-1/4 -left-20 w-96 h-96 bg-brand-primary/10 blur-[120px] rounded-full"></div>
-          <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-brand-purple/10 blur-[120px] rounded-full"></div>
+      <div ref={mainContainer}>
+        
+        <div ref={introOverlayRef} className="fixed inset-0 z-[999] bg-black flex items-center justify-center pointer-events-none">
+           <div ref={introLogoRef} className="text-brand-primary font-black text-4xl"><img 
+              src="/images/logo.png" 
+              alt="Símbolo AmbaTech"
+              className="h-10 w-auto group-hover:rotate-12 transition-transform" 
+            /></div>
+        </div>
 
-          <div className="container mx-auto text-center px-4 relative z-10">
-            <span className="inline-block py-1 px-3 rounded-full bg-white/5 border border-white/10 text-brand-orange-light text-xs font-bold tracking-widest uppercase mb-6">
-              Inovação & Performance
-            </span>
-            <h1 className="text-5xl md:text-7xl font-black text-white leading-[1.1] mb-6 tracking-tighter">
-              Transformamos Ideias em <br />
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-brand-orange-light via-brand-primary to-brand-purple">
-                Experiências Digitais
+        <main>
+          {/* SEÇÃO INÍCIO (HERO) */}
+          <section ref={heroContentRef} id="inicio" className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+            <div className="absolute top-1/4 -left-20 w-96 h-96 bg-brand-primary/10 blur-[120px] rounded-full"></div>
+            <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-brand-purple/30 blur-[120px] rounded-full"></div>
+
+            <div className="container mx-auto text-center px-4 relative z-10">
+              <span className="inline-block py-1 px-3 rounded-full bg-white/5 border border-white/10 text-brand-orange-light text-xs font-bold tracking-widest uppercase mb-6">
+                Inovação & Performance
               </span>
-            </h1>
-            <p className="max-w-2xl mx-auto text-lg md:text-xl text-gray-400 mb-10 leading-relaxed">
-              Unimos design de ponta e tecnologia robusta para acelerar o crescimento do seu negócio no mundo digital.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="#contato" className="bg-brand-primary hover:bg-brand-orange-dark text-white font-bold py-4 px-10 rounded-xl text-lg shadow-2xl shadow-brand-primary/30 transition-all hover:scale-105">
-                Vamos Conversar
-              </a>
-              <a href="#trabalhos" className="bg-white/5 hover:bg-white/10 text-white font-bold py-4 px-10 rounded-xl text-lg border border-white/10 transition-all">
-                Ver Portfólio
-              </a>
-            </div>
-          </div>
-        </section>
-
-        {/* SEÇÃO NOSSOS SERVIÇOS */}
-        <section id="servicos" className="py-24 bg-dark-card border-y border-dark-border relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-brand-purple/10 via-transparent to-brand-orange-light/10 pointer-events-none"></div>
-
-          <div className="container mx-auto px-4 relative z-10">
-            <div className="text-center max-w-3xl mx-auto mb-16">
-              <h2 className="text-3xl md:text-4xl font-black text-white mb-4">Nossos Serviços</h2>
-              <p className="text-gray-400 text-lg">
-                Criamos soluções digitais que unem estratégia, design e tecnologia para gerar resultados reais e duradouros.
+              <h1 className="text-5xl md:text-7xl font-black text-white leading-[1.1] mb-6 tracking-tighter">
+                Transformamos Ideias em <br />
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-brand-orange-light via-brand-primary to-brand-purple">
+                  Experiências Digitais
+                </span>
+              </h1>
+              <p className="max-w-2xl mx-auto text-lg md:text-xl text-gray-400 mb-10 leading-relaxed">
+                Unimos design de ponta e tecnologia robusta para acelerar o crescimento do seu negócio no mundo digital.
               </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#contato" className="bg-brand-primary hover:bg-brand-orange-dark text-white font-bold py-4 px-10 rounded-xl text-lg shadow-2xl shadow-brand-primary/30 transition-all hover:scale-105">
+                  Vamos Conversar
+                </a>
+                <a href="#trabalhos" className="bg-white/5 hover:bg-white/10 text-white font-bold py-4 px-10 rounded-xl text-lg border border-white/10 transition-all">
+                  Ver Portfólio
+                </a>
+              </div>
             </div>
+          </section>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {/* Card 1 */}
-              <div className="group relative bg-dark-card border border-white/5 rounded-2xl p-8 hover:border-brand-primary/50 transition-all duration-500">
-                <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
-                <div className="relative z-10">
-                  <div className="w-14 h-14 bg-brand-primary/10 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg shadow-brand-primary/10">
+          {/* SEÇÃO NOSSOS SERVIÇOS */}
+          <section id="servicos" className="py-24 bg-dark-card border-y border-white/5 relative overflow-hidden">
+            <div className="container mx-auto px-4 relative z-10">
+              <div className="text-center max-w-3xl mx-auto mb-16">
+                <h2 className="text-3xl md:text-4xl font-black text-white mb-4">Nossos Serviços</h2>
+                <p className="text-gray-400 text-lg">
+                  Criamos soluções digitais que unem estratégia, design e tecnologia.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {/* Card 1 */}
+                <div className="group relative bg-black/20 border border-white/5 rounded-2xl p-8 hover:border-brand-primary/50 transition-all duration-500">
+                  <div className="w-14 h-14 bg-brand-primary/10 rounded-xl flex items-center justify-center mb-6">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-brand-orange-light" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M13 10V3L4 14h7v7l9-11h-7z" />
                     </svg>
                   </div>
                   <h3 className="text-2xl font-bold text-white mb-4">Landing Pages</h3>
-                  <p className="text-gray-400 mb-6 text-sm leading-relaxed">Focadas em conversão imediata, ideais para campanhas de tráfego pago e lançamentos de produtos.</p>
-                  <ul className="space-y-3 mb-8">
-                    <li className="flex items-center text-sm text-gray-300"><span className="text-brand-primary mr-2">✓</span> Design estratégico</li>
-                    <li className="flex items-center text-sm text-gray-300"><span className="text-brand-primary mr-2">✓</span> Otimização para SEO</li>
-                    <li className="flex items-center text-sm text-gray-300"><span className="text-brand-primary mr-2">✓</span> Mobile First</li>
-                  </ul>
-                  <a href="#contato" className="inline-flex items-center font-bold text-brand-orange-light hover:gap-2 transition-all">
-                    Solicitar orçamento <span className="ml-1">→</span>
-                  </a>
+                  <p className="text-gray-400 mb-6 text-sm">Focadas em conversão imediata para suas campanhas.</p>
                 </div>
-              </div>
 
-              {/* Card 2 */}
-              <div className="group relative bg-dark-card border border-white/5 rounded-2xl p-8 hover:border-brand-purple/50 transition-all duration-500">
-                <div className="absolute inset-0 bg-gradient-to-br from-brand-purple/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
-                <div className="relative z-10">
-                  <div className="w-14 h-14 bg-brand-purple/10 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg shadow-brand-purple/10">
+                {/* Card 2 */}
+                <div className="group relative bg-black/20 border border-white/5 rounded-2xl p-8 hover:border-brand-purple/50 transition-all duration-500">
+                   <div className="w-14 h-14 bg-brand-purple/10 rounded-xl flex items-center justify-center mb-6">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-brand-purple" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                     </svg>
                   </div>
-                  <h3 className="text-2xl font-bold text-white mb-4">Portfólio Profissional</h3>
-                  <p className="text-gray-400 mb-6 text-sm leading-relaxed">Sites elegantes para fortalecer sua autoridade e apresentar seus projetos com máxima credibilidade.</p>
-                  <ul className="space-y-3 mb-8">
-                    <li className="flex items-center text-sm text-gray-300"><span className="text-brand-purple mr-2">✓</span> Identidade Visual Única</li>
-                    <li className="flex items-center text-sm text-gray-300"><span className="text-brand-purple mr-2">✓</span> Galeria Dinâmica</li>
-                    <li className="flex items-center text-sm text-gray-300"><span className="text-brand-purple mr-2">✓</span> Performance Veloz</li>
-                  </ul>
-                  <a href="#contato" className="inline-flex items-center font-bold text-brand-orange-light hover:gap-2 transition-all">
-                    Solicitar orçamento <span className="ml-1">→</span>
-                  </a>
+                  <h3 className="text-2xl font-bold text-white mb-4">Portfólio</h3>
+                  <p className="text-gray-400 mb-6 text-sm">Apresente seus projetos com máxima credibilidade.</p>
                 </div>
-              </div>
 
-              {/* Card 3 */}
-              <div className="group relative bg-dark-card border border-white/5 rounded-2xl p-8 hover:border-brand-magenta/50 transition-all duration-500">
-                <div className="absolute inset-0 bg-gradient-to-br from-brand-magenta/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
-                <div className="relative z-10">
-                  <div className="w-14 h-14 bg-brand-magenta/10 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg shadow-brand-magenta/10">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-brand-magenta" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                {/* Card 3 */}
+                <div className="group relative bg-black/20 border border-white/5 rounded-2xl p-8 hover:border-pink-500/50 transition-all duration-500">
+                  <div className="w-14 h-14 bg-pink-500/10 rounded-xl flex items-center justify-center mb-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-pink-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
                     </svg>
                   </div>
-                  <h3 className="text-2xl font-bold text-white mb-4">UX / UI Design</h3>
-                  <p className="text-gray-400 mb-6 text-sm leading-relaxed">Projetamos interfaces centradas no usuário, garantindo uma navegação intuitiva e inesquecível.</p>
-                  <ul className="space-y-3 mb-8">
-                    <li className="flex items-center text-sm text-gray-300"><span className="text-brand-magenta mr-2">✓</span> Prototipagem em Figma</li>
-                    <li className="flex items-center text-sm text-gray-300"><span className="text-brand-magenta mr-2">✓</span> Jornada do Usuário</li>
-                    <li className="flex items-center text-sm text-gray-300"><span className="text-brand-magenta mr-2">✓</span> Design System</li>
-                  </ul>
-                  <a href="#contato" className="inline-flex items-center font-bold text-brand-orange-light hover:gap-2 transition-all">
-                    Solicitar orçamento <span className="ml-1">→</span>
-                  </a>
+                  <h3 className="text-2xl font-bold text-white mb-4">UI / UX Design</h3>
+                  <p className="text-gray-400 mb-6 text-sm">Interfaces centradas na melhor experiência do usuário.</p>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        {/* SEÇÃO NOSSOS TRABALHOS */}
-        <section id="trabalhos" className="py-24 bg-dark-bg border-y border-dark-border relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-b from-white/[0.02] via-transparent to-black/40 pointer-events-none"></div>
-
-          <div className="container mx-auto px-4 relative z-10">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">
-                Nosso <span className="text-brand-primary">Portfólio</span>
-              </h2>
-              <p className="text-gray-400">Uma amostra do que podemos construir para você.</p>
-            </div>
-
-            <div className="space-y-20">
-              {/* Projeto 1 */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-                <div className="order-2 lg:order-1 group bg-dark-card border border-white/5 rounded-2xl overflow-hidden shadow-2xl transition-all duration-500 hover:border-brand-primary/30">
-                  <div className="bg-neutral-800/50 px-4 py-3 border-b border-white/5 flex items-center gap-2">
-                    <div className="flex gap-1.5">
-                      <div className="w-3 h-3 rounded-full bg-red-500/50"></div>
-                      <div className="w-3 h-3 rounded-full bg-yellow-500/50"></div>
-                      <div className="w-3 h-3 rounded-full bg-green-500/50"></div>
-                    </div>
-                    <div className="mx-auto bg-black/20 rounded-md px-3 py-1 text-[10px] text-gray-500 font-mono w-1/2 text-center">
-                      faiskapressao.com
-                    </div>
-                  </div>
-                  <div className="relative overflow-hidden aspect-video">
-                    <img src="images/projeto-raissa.png" alt="Projeto Raissa" className="w-full h-full object-cover object-top group-hover:scale-105 transition-all duration-700" />
-                    <div className="absolute inset-0 bg-brand-purple/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                      <a href="https://faiskapressao.com" target="_blank" rel="noreferrer" className="bg-white text-brand-purple px-6 py-2 rounded-full font-bold">Ver Site Oficial</a>
-                    </div>
-                  </div>
-                </div>
-                <div className="order-1 lg:order-2 space-y-4">
-                  <span className="text-brand-primary font-bold tracking-widest text-xs uppercase">Web Design / Art</span>
-                  <h3 className="text-3xl font-black text-white">Portfólio Artístico: Raíssa Alves</h3>
-                  <p className="text-gray-400 leading-relaxed">Um site minimalista e focado na estética visual, desenvolvido para destacar obras de arte com alta performance e elegância.</p>
-                </div>
+          {/* SEÇÃO NOSSOS TRABALHOS */}
+          <section id="trabalhos" className="py-24 bg-dark-bg border-y border-white/5 relative">
+            <div className="container mx-auto px-4 relative z-10">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">
+                  Nosso <span className="text-brand-primary">Portfólio</span>
+                </h2>
               </div>
 
-              {/* Projeto 2 */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+              <div className="space-y-20">
+                {/* Exemplo de Projeto 1 (Placeholder) */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+                  <div className="bg-dark-card border border-white/5 rounded-2xl h-64 md:h-80 flex items-center justify-center bg-neutral-900">
+                    <span className="text-gray-600">Imagem do Projeto 1</span>
+                  </div>
+                  <div className="space-y-4">
+                    <span className="text-brand-primary font-bold text-xs uppercase">Web Design</span>
+                    <h3 className="text-3xl font-black text-white">Projeto Faiska</h3>
+                    <p className="text-gray-400">Um site minimalista focado em alta performance.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* SEÇÃO DUVIDAS */}
+          <section id="duvidas" className="py-24 bg-dark-bg">
+            <div className="container mx-auto px-4">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+                <div className="space-y-8">
+                  <h2 className="text-5xl font-black text-white leading-none tracking-tighter">
+                    Perguntas <span className="text-brand-primary">Frequentes</span>
+                  </h2>
+                  <div className="flex flex-wrap gap-3">
+                    {categorias.map(cat => (
+                      <button
+                        key={cat}
+                        onClick={() => {
+                          setCategoriaAtiva(cat);
+                          setPerguntaAberta(null);
+                        }}
+                        className={`px-6 py-2.5 rounded-full font-bold text-sm transition-all ${
+                          categoriaAtiva === cat 
+                            ? 'bg-brand-primary text-white' 
+                            : 'bg-white/5 text-gray-400 border border-white/10 hover:bg-white/10'
+                        }`}
+                      >
+                        {cat}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
                 <div className="space-y-4">
-                  <span className="text-brand-orange-light font-bold tracking-widest text-xs uppercase">Landing Page / Business</span>
-                  <h3 className="text-3xl font-black text-white">Academia de Muay Thai</h3>
-                  <p className="text-gray-400 leading-relaxed">Página de conversão estratégica criada para captação de novos alunos, com integração de formulários e design agressivo e moderno.</p>
-                </div>
-                <div className="group bg-dark-card border border-white/5 rounded-2xl overflow-hidden shadow-2xl transition-all duration-500 hover:border-brand-orange-light/30">
-                  <div className="bg-neutral-800/50 px-4 py-3 border-b border-white/5 flex items-center gap-2">
-                    <div className="flex gap-1.5">
-                      <div className="w-3 h-3 rounded-full bg-red-500/50"></div>
-                      <div className="w-3 h-3 rounded-full bg-yellow-500/50"></div>
-                      <div className="w-3 h-3 rounded-full bg-green-500/50"></div>
+                  {dadosFaq[categoriaAtiva].map((item, index) => (
+                    <div key={index} className="group bg-white/5 border border-white/10 rounded-3xl overflow-hidden">
+                      <button 
+                        onClick={() => setPerguntaAberta(perguntaAberta === index ? null : index)}
+                        className="w-full p-6 flex justify-between items-center text-left"
+                      >
+                        <span className="text-white font-medium md:text-lg pr-4">{item.q}</span>
+                        <div className={`w-8 h-8 rounded-full border border-white/10 flex items-center justify-center transition-all ${perguntaAberta === index ? 'rotate-180 bg-brand-primary' : ''}`}>
+                           <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M19 9l-7 7-7-7" />
+                          </svg>
+                        </div>
+                      </button>
+                      
+                      {perguntaAberta === index && (
+                        <div className="px-6 pb-6 text-gray-400 leading-relaxed">
+                          {item.a}
+                        </div>
+                      )}
                     </div>
-                    <div className="mx-auto bg-black/20 rounded-md px-3 py-1 text-[10px] text-gray-500 font-mono w-1/2 text-center">
-                      laura.github.io/muay-thai
-                    </div>
-                  </div>
-                  <div className="relative overflow-hidden aspect-video">
-                    <img src="images/muay-thai-thumb.png" alt="Muay Thai" className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700" />
-                    <div className="absolute inset-0 bg-brand-orange-dark/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                      <a href="https://laurafercordeiro.github.io/Muay-Thai/index.html" target="_blank" rel="noreferrer" className="bg-white text-brand-orange-dark px-6 py-2 rounded-full font-bold">Ver Projeto</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Projeto 3 (Vídeo) */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-                <div className="order-2 lg:order-1 group bg-dark-card border border-white/5 rounded-2xl overflow-hidden shadow-2xl transition-all duration-500">
-                  <div className="bg-neutral-800/80 px-4 py-3 flex items-center justify-between border-b border-white/5">
-                    <span className="text-[10px] text-gray-400 font-bold tracking-widest uppercase">Video Showcase</span>
-                    <div className="flex gap-1">
-                      <div className="w-2 h-2 rounded-full bg-white/20"></div>
-                      <div className="w-2 h-2 rounded-full bg-white/20"></div>
-                    </div>
-                  </div>
-                  <div className="relative aspect-video bg-black">
-                    <video className="w-full h-full object-cover" controls autoPlay muted loop>
-                      <source src="/video/video.mp4" type="video/mp4" />
-                    </video>
-                  </div>
-                </div>
-                <div className="order-1 lg:order-2 space-y-4">
-                  <span className="text-brand-magenta font-bold tracking-widest text-xs uppercase">E-Commerce / Full Stack</span>
-                  <h3 className="text-3xl font-black text-white">Site Institucional: Tearti</h3>
-                  <p className="text-gray-400 leading-relaxed">Demonstração de uma plataforma completa de comércio eletrônico, com sistema de catálogo e interface focada na experiência de compra.</p>
+                  ))}
                 </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        {/* SEÇÃO CONTATO */}
-        <section id="contato" className="py-24 relative overflow-hidden">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-brand-primary/10 blur-[100px] rounded-full pointer-events-none"></div>
+          {/* SEÇÃO CONTATO */}
+          <section id="contato" className="py-24 relative overflow-hidden">
+            <div className="container mx-auto px-4 relative z-10">
+              <div className="max-w-3xl mx-auto text-center mb-12">
+                <h2 className="text-4xl md:text-5xl font-black text-white mb-4">
+                  Vamos <span className="text-brand-primary">Conversar?</span>
+                </h2>
+              </div>
 
-          <div className="container mx-auto px-4 relative z-10">
-            <div className="max-w-3xl mx-auto text-center mb-12">
-              <h2 className="text-4xl md:text-5xl font-black text-white mb-4 tracking-tighter">
-                Vamos <span className="ml-2 text-brand-primary">Conversar?</span>
-              </h2>
-              <p className="text-gray-400 text-lg">
-                Estamos prontos para ouvir sobre sua próxima grande ideia. <br className="hidden md:block" />
-                Preencha o formulário e retornaremos em breve.
-              </p>
-            </div>
-
-            <div className="max-w-2xl mx-auto">
-              <form action="https://api.web3forms.com/submit" method="POST" className="bg-dark-card/40 backdrop-blur-xl border border-white/5 p-8 md:p-12 rounded-[2rem] shadow-2xl relative">
-                <input type="hidden" name="access_key" value="55fed33c-2c36-489a-8e94-a7dcc614d2ef" />
-                <input type="hidden" name="from_name" value="AmbaTech Contato" />
-                <input type="hidden" name="subject" value="Novo Orçamento via Site" />
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                  <div className="space-y-2">
-                    <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em] ml-1">Nome</label>
-                    <input type="text" name="name" required placeholder="Seu nome"
-                      className="w-full bg-black/20 border border-white/10 rounded-2xl p-4 text-white placeholder:text-gray-700 focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary outline-none transition-all duration-300 hover:border-white/20" />
+              <div className="max-w-2xl mx-auto">
+                <form className="bg-white/5 backdrop-blur-xl border border-white/5 p-8 md:p-12 rounded-[2rem]">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div className="space-y-2">
+                      <label className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Nome</label>
+                      <input type="text" className="w-full bg-black/20 border border-white/10 rounded-2xl p-4 text-white focus:border-brand-primary outline-none" placeholder="Seu nome" />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Email</label>
+                      <input type="email" className="w-full bg-black/20 border border-white/10 rounded-2xl p-4 text-white focus:border-brand-primary outline-none" placeholder="seu@email.com" />
+                    </div>
                   </div>
-                  <div className="space-y-2">
-                    <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em] ml-1">Email</label>
-                    <input type="email" name="email" required placeholder="seu@email.com"
-                      className="w-full bg-black/20 border border-white/10 rounded-2xl p-4 text-white placeholder:text-gray-700 focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary outline-none transition-all duration-300 hover:border-white/20" />
+                  <div className="space-y-2 mb-8">
+                    <label className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Mensagem</label>
+                    <textarea rows="4" className="w-full bg-black/20 border border-white/10 rounded-2xl p-4 text-white focus:border-brand-primary outline-none" placeholder="Como podemos ajudar?"></textarea>
                   </div>
-                </div>
-
-                <div className="space-y-2 mb-8">
-                  <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em] ml-1">Mensagem</label>
-                  <textarea name="message" rows="5" required placeholder="Como podemos ajudar no seu projeto?"
-                    className="w-full bg-black/20 border border-white/10 rounded-2xl p-4 text-white placeholder:text-gray-700 focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary outline-none transition-all duration-300 hover:border-white/20 resize-none"></textarea>
-                </div>
-
-                <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} />
-
-                <div className="relative group">
-                  <div className="absolute -inset-0.5 bg-gradient-to-r from-brand-orange-light to-brand-primary rounded-2xl blur opacity-20 group-hover:opacity-50 transition duration-500"></div>
-                  <button type="submit"
-                    className="relative w-full bg-gradient-to-r from-brand-orange-light to-brand-primary text-white font-black py-5 rounded-2xl text-lg tracking-wide shadow-xl transition-all duration-300 transform group-hover:scale-[1.01] active:scale-[0.98]">
+                  <button className="w-full bg-brand-primary text-white font-black py-4 rounded-2xl hover:bg-brand-orange-dark transition-colors">
                     Enviar Mensagem
                   </button>
-                </div>
-
-                <p className="text-center text-gray-600 text-[10px] mt-6 uppercase tracking-widest font-medium">
-                  Resposta em menos de 24 horas úteis
-                </p>
-              </form>
+                </form>
+              </div>
             </div>
-          </div>
-        </section>
-      </main>
+          </section>
 
-      {/* RODAPÉ */}
-      <footer className="bg-dark-card border-t border-dark-border">
-        <div className="container mx-auto text-center p-6">
-          <p className="text-gray-400">&copy; 2025 AmbaTech. Todos os direitos reservados.</p>
-        </div>
-      </footer>
+        </main>
+
+        <footer className="bg-black border-t border-white/10 py-8">
+          <div className="container mx-auto text-center">
+            <p className="text-gray-500">&copy; 2025 AmbaTech. Todos os direitos reservados.</p>
+          </div>
+        </footer>
+
+      </div> {/* Fim do mainContainer */}
     </div>
-  )
+  );
 }

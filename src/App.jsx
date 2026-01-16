@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
-import Lenis from '@studio-freight/lenis'; 
+import Lenis from '@studio-freight/lenis';
 
 export default function App() {
   const [isMenuOpen, setIsOpen] = useState(false);
@@ -10,10 +10,10 @@ export default function App() {
   const closeMenu = () => setIsOpen(false);
 
   // REFS (Inicializadas com null para o React)
-  const mainContainer = useRef(null); 
-  const introOverlayRef = useRef(null); 
-  const introLogoRef = useRef(null);   
-  const heroContentRef = useRef(null);  
+  const mainContainer = useRef(null);
+  const introOverlayRef = useRef(null);
+  const introLogoRef = useRef(null);
+  const heroContentRef = useRef(null);
 
   // SMOOTH SCROLL (Lenis com Cleanup)
   useEffect(() => {
@@ -34,7 +34,7 @@ export default function App() {
       lenis.raf(time);
       requestAnimationFrame(raf);
     }
-    
+
     requestAnimationFrame(raf);
 
     return () => {
@@ -45,31 +45,31 @@ export default function App() {
 
   const dadosFaq = {
     'Funcionamento': [
-      {q: "Como funciona o processo de desenvolvimento?", a: "Nosso processo é dividido em etapas claras: Briefing, Design, Desenvolvimento e Lançamento."},
-      {q: "Eu acompanho o Projeto?", a: "Sim. Mantemos contato constante via WhatsApp ou Email com atualizações semanais."},
-      {q: "Posso pedir ajustes durante o projeto?", a: "Sim. Ajustes fazem parte do processo e temos rodadas de revisão específicas."},
-      {q: "Em quanto tempo o projeto fica pronto?", a: "O prazo varia conforme o tipo, geralmente entre 15 a 45 dias." }
+      { q: "Como funciona o processo de desenvolvimento?", a: "Nosso processo é dividido em etapas claras: entendimento da sua necessidade, definição da solução, desenvolvimento, ajustes finais e entrega. Você acompanha tudo do início ao fim." },
+      { q: "Eu acompanho o Projeto?", a: "Sim. Mantemos contato constante durante o desenvolvimento para validações, alinhamentos e ajustes, garantindo que o resultado final esteja alinhado ao que você espera." },
+      { q: "Posso pedir ajustes durante o projeto?", a: "Sim. Ajustes fazem parte do processo e são previstos conforme o escopo definido no início do projeto." },
+      { q: "Em quanto tempo o projeto fica pronto?", a: "O prazo varia conforme o tipo e a complexidade do projeto, mas sempre definimos um cronograma claro antes de iniciar o desenvolvimento." }
     ],
     'Serviços e resultados': [
-      {q: "Qual a diferença entre landing page, portfólio e UI/UX?", a: "Landing pages convertem, portfólios apresentam e UI/UX foca na experiência de uso."},
-      {q: "As landing pages são focadas em conversão?", a: "Sim. Usamos gatilhos mentais e design estratégico para vender mais."},
-      {q: "O site funciona bem em dispositivos móveis?", a: "Sim. Desenvolvemos com mentalidade Mobile First."},
-      {q: "Posso usar o projeto com outro desenvolvedor depois?", a: "Sim. O código é seu após a entrega final."}
+      { q: "Qual a diferença entre landing page, portfólio e UI/UX?", a: "Landing pages são focadas em conversão, portfólios em apresentação profissional e UI/UX em criar interfaces funcionais, intuitivas e visualmente consistentes." },
+      { q: "As landing pages são focadas em conversão?", a: "Sim. Desenvolvemos landing pages pensadas para gerar resultados, com foco em estrutura, clareza e experiência do usuário." },
+      { q: "O site funciona bem em dispositivos móveis?", a: "Sim. Todos os projetos são responsivos e adaptados para diferentes tamanhos de tela." },
+      { q: "Posso usar o projeto com outro desenvolvedor depois?", a: "Sim. Após a entrega, os arquivos e o projeto são seus, sem dependência futura." }
     ],
     'Preço e contrato': [
-      {q: "Como funciona o orçamento?", a: "O orçamento é personalizado baseada na complexidade do seu projeto."},
-      {q: "O que está incluso no valor do projeto?", a: "Design, programação, configuração de domínio e suporte inicial."},
-      {q: "Existe contrato?", a: "Sim. Trabalhamos com contrato para garantir segurança para ambas as partes."},
-      {q: "É possível parcelar o pagamento?", a: "Sim. Oferecemos condições flexíveis no cartão ou Pix parcelado."}
+      { q: "Como funciona o orçamento?", a: "O orçamento é feito com base no escopo do projeto. Após o alinhamento, enviamos uma proposta com valor fechado." },
+      { q: "O que está incluso no valor do projeto?", a: "Estão inclusos desenvolvimento, ajustes previstos no escopo e entrega do projeto conforme acordado." },
+      { q: "Existe contrato?", a: "Sim. Trabalhamos com contrato para garantir segurança para ambas as partes." },
+      { q: "É possível parcelar o pagamento?", a: "Sim. Oferecemos condições de pagamento que podem ser ajustadas conforme o projeto." }
     ],
     'Suporte': [
-      {q: "Vocês oferecem suporte após a entrega?", a: "Sim. Oferecemos 30 dias de suporte gratuito para bugs."},
-      {q: "O que acontece se eu encontrar algum problema depois?", a: "Se for erro de código nosso, corrigimos sem custo."},
-      {q: "Vocês fazem manutenção ou melhorias futuras?", a: "Sim. Podem ser contratadas via pacotes de horas ou mensalidade."},
-      {q: "Posso contratar novos serviços depois?", a: "Claro. Muitos clientes evoluem de Landing Pages para E-commerces."}
+      { q: "Vocês oferecem suporte após a entrega?", a: "Sim. Oferecemos 30 dias de suporte gratuito para bugs." },
+      { q: "O que acontece se eu encontrar algum problema depois?", a: "Caso surja algum problema relacionado ao que foi desenvolvido, fazemos a correção sem custos adicionais." },
+      { q: "Vocês fazem manutenção ou melhorias futuras?", a: "Sim. Manutenções, melhorias e novas funcionalidades podem ser contratadas separadamente." },
+      { q: "Posso contratar novos serviços depois?", a: "Claro. Você pode contratar novos serviços ou evoluir o projeto sempre que precisar." }
     ]
   };
-  
+
   const categorias = Object.keys(dadosFaq);
 
   // ANIMAÇÃO GSAP
@@ -86,21 +86,21 @@ export default function App() {
       scale: 0.5,
       duration: 1.2
     })
-    .to(introLogoRef.current, {
-      scale: 80, 
-      duration: 2,
-      delay: 0.2 
-    })
-    .to(introOverlayRef.current, {
-      autoAlpha: 0,
-      duration: 1
-    }, "-=1.5")
-    .to(heroContentRef.current, {
-      opacity: 1,
-      y: 0,
-      duration: 1.5,
-      ease: "power4.out" 
-    }, "-=1");
+      .to(introLogoRef.current, {
+        scale: 80,
+        duration: 2,
+        delay: 0.2
+      })
+      .to(introOverlayRef.current, {
+        autoAlpha: 0,
+        duration: 1
+      }, "-=1.5")
+      .to(heroContentRef.current, {
+        opacity: 1,
+        y: 0,
+        duration: 1.5,
+        ease: "power4.out"
+      }, "-=1");
 
   }, { scope: mainContainer });
 
@@ -110,10 +110,10 @@ export default function App() {
       <header className="sticky top-0 z-50 bg-dark-bg/70 backdrop-blur-xl border-b border-white/5">
         <div className="container mx-auto flex justify-between items-center p-4">
           <a href="#" className="flex items-center gap-3 group">
-            <img 
-              src="/images/logo.png" 
+            <img
+              src="/images/logo.png"
               alt="Símbolo AmbaTech"
-              className="h-10 w-auto group-hover:rotate-12 transition-transform" 
+              className="h-10 w-auto group-hover:rotate-12 transition-transform"
             />
             <span className="flex text-2xl font-black tracking-tighter italic">
               <span className="text-brand-orange-light">AMBA</span>
@@ -133,7 +133,7 @@ export default function App() {
           </nav>
 
           {/* Botão Mobile */}
-          <button 
+          <button
             onClick={() => setIsOpen(!isMenuOpen)}
             className="md:hidden p-2 text-white hover:bg-white/10 rounded-lg"
           >
@@ -159,13 +159,13 @@ export default function App() {
       </header>
 
       <div ref={mainContainer}>
-        
+
         <div ref={introOverlayRef} className="fixed inset-0 z-[999] bg-black flex items-center justify-center pointer-events-none">
-           <div ref={introLogoRef} className="text-brand-primary font-black text-4xl"><img 
-              src="/images/logo.png" 
-              alt="Símbolo AmbaTech"
-              className="h-10 w-auto group-hover:rotate-12 transition-transform" 
-            /></div>
+          <div ref={introLogoRef} className="text-brand-primary font-black text-4xl"><img
+            src="/images/logo.png"
+            alt="Símbolo AmbaTech"
+            className="h-10 w-auto group-hover:rotate-12 transition-transform"
+          /></div>
         </div>
 
         <main>
@@ -180,7 +180,7 @@ export default function App() {
               </span>
               <h1 className="text-5xl md:text-7xl font-black text-white leading-[1.1] mb-6 tracking-tighter">
                 Transformamos Ideias em <br />
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-brand-orange-light via-brand-primary to-brand-purple">
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-brand-orange-light via-brand-primary to-brand-purple pb-1 pr-2">
                   Experiências Digitais
                 </span>
               </h1>
@@ -198,233 +198,272 @@ export default function App() {
             </div>
           </section>
 
-                  {/* SEÇÃO NOSSOS SERVIÇOS */}
-        <section id="servicos" className="py-24 bg-dark-card border-y border-dark-border relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-brand-purple/10 via-transparent to-brand-orange-light/10 pointer-events-none"></div>
+          {/* SEÇÃO NOSSOS SERVIÇOS */}
+          <section id="servicos" className="py-24 bg-dark-card border-y border-dark-border relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-brand-purple/10 via-transparent to-brand-orange-light/10 pointer-events-none"></div>
 
-          <div className="container mx-auto px-4 relative z-10">
-            <div className="text-center max-w-3xl mx-auto mb-16">
-              <h2 className="text-3xl md:text-4xl font-black text-white mb-4">Nossos Serviços</h2>
-              <p className="text-gray-400 text-lg">
-                Criamos soluções digitais que unem estratégia, design e tecnologia para gerar resultados reais e duradouros.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {/* Card 1 */}
-              <div className="group relative bg-dark-card border border-white/5 rounded-2xl p-8 hover:border-brand-primary/50 transition-all duration-500">
-                <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
-                <div className="relative z-10">
-                  <div className="w-14 h-14 bg-brand-primary/10 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg shadow-brand-primary/10">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-brand-orange-light" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                    </svg>
-                  </div>
-                  <h3 className="text-2xl font-bold text-white mb-4">Landing Pages</h3>
-                  <p className="text-gray-400 mb-6 text-sm leading-relaxed">Focadas em conversão imediata, ideais para campanhas de tráfego pago e lançamentos de produtos.</p>
-                  <ul className="space-y-3 mb-8">
-                    <li className="flex items-center text-sm text-gray-300"><span className="text-brand-primary mr-2">✓</span> Design estratégico</li>
-                    <li className="flex items-center text-sm text-gray-300"><span className="text-brand-primary mr-2">✓</span> Otimização para SEO</li>
-                    <li className="flex items-center text-sm text-gray-300"><span className="text-brand-primary mr-2">✓</span> Mobile First</li>
-                  </ul>
-                  <a href="#contato" className="inline-flex items-center font-bold text-brand-orange-light hover:gap-2 transition-all">
-                    Solicitar orçamento <span className="ml-1">→</span>
-                  </a>
-                </div>
+            <div className="container mx-auto px-4 relative z-10">
+              <div className="text-center max-w-3xl mx-auto mb-16">
+                <h2 className="text-3xl md:text-4xl font-black text-white mb-4">Nossos Serviços</h2>
+                <p className="text-gray-400 text-lg">
+                  Criamos soluções digitais que unem estratégia, design e tecnologia para gerar resultados reais e duradouros.
+                </p>
               </div>
 
-              {/* Card 2 */}
-              <div className="group relative bg-dark-card border border-white/5 rounded-2xl p-8 hover:border-brand-purple/50 transition-all duration-500">
-                <div className="absolute inset-0 bg-gradient-to-br from-brand-purple/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
-                <div className="relative z-10">
-                  <div className="w-14 h-14 bg-brand-purple/10 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg shadow-brand-purple/10">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-brand-purple" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                    </svg>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {/* Card 1 */}
+                <div className="group relative bg-dark-card border border-white/5 rounded-2xl p-8 hover:border-brand-primary/50 transition-all duration-500">
+                  <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
+                  <div className="relative z-10">
+                    <div className="w-14 h-14 bg-brand-primary/10 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg shadow-brand-primary/10">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-brand-orange-light" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                      </svg>
+                    </div>
+                    <h3 className="text-2xl font-bold text-white mb-4">Landing Pages</h3>
+                    <p className="text-gray-400 mb-6 text-sm leading-relaxed">Focadas em conversão imediata, ideais para campanhas de tráfego pago e lançamentos de produtos.</p>
+                    <ul className="space-y-3 mb-8">
+                      <li className="flex items-center text-sm text-gray-300"><span className="text-brand-primary mr-2">✓</span> Design estratégico</li>
+                      <li className="flex items-center text-sm text-gray-300"><span className="text-brand-primary mr-2">✓</span> Otimização para SEO</li>
+                      <li className="flex items-center text-sm text-gray-300"><span className="text-brand-primary mr-2">✓</span> Mobile First</li>
+                    </ul>
+                    <a href="#contato" className="inline-flex items-center font-bold text-brand-orange-light hover:gap-2 transition-all">
+                      Solicitar orçamento <span className="ml-1">→</span>
+                    </a>
                   </div>
-                  <h3 className="text-2xl font-bold text-white mb-4">Portfólio Profissional</h3>
-                  <p className="text-gray-400 mb-6 text-sm leading-relaxed">Sites elegantes para fortalecer sua autoridade e apresentar seus projetos com máxima credibilidade.</p>
-                  <ul className="space-y-3 mb-8">
-                    <li className="flex items-center text-sm text-gray-300"><span className="text-brand-purple mr-2">✓</span> Identidade Visual Única</li>
-                    <li className="flex items-center text-sm text-gray-300"><span className="text-brand-purple mr-2">✓</span> Galeria Dinâmica</li>
-                    <li className="flex items-center text-sm text-gray-300"><span className="text-brand-purple mr-2">✓</span> Performance Veloz</li>
-                  </ul>
-                  <a href="#contato" className="inline-flex items-center font-bold text-brand-orange-light hover:gap-2 transition-all">
-                    Solicitar orçamento <span className="ml-1">→</span>
-                  </a>
                 </div>
-              </div>
 
-              {/* Card 3 */}
-              <div className="group relative bg-dark-card border border-white/5 rounded-2xl p-8 hover:border-brand-magenta/50 transition-all duration-500">
-                <div className="absolute inset-0 bg-gradient-to-br from-brand-magenta/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
-                <div className="relative z-10">
-                  <div className="w-14 h-14 bg-brand-magenta/10 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg shadow-brand-magenta/10">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-brand-magenta" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
-                    </svg>
+                {/* Card 2 */}
+                <div className="group relative bg-dark-card border border-white/5 rounded-2xl p-8 hover:border-brand-purple/50 transition-all duration-500">
+                  <div className="absolute inset-0 bg-gradient-to-br from-brand-purple/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
+                  <div className="relative z-10">
+                    <div className="w-14 h-14 bg-brand-purple/10 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg shadow-brand-purple/10">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-brand-purple" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                      </svg>
+                    </div>
+                    <h3 className="text-2xl font-bold text-white mb-4">Portfólio Profissional</h3>
+                    <p className="text-gray-400 mb-6 text-sm leading-relaxed">Sites elegantes para fortalecer sua autoridade e apresentar seus projetos com máxima credibilidade.</p>
+                    <ul className="space-y-3 mb-8">
+                      <li className="flex items-center text-sm text-gray-300"><span className="text-brand-purple mr-2">✓</span> Identidade Visual Única</li>
+                      <li className="flex items-center text-sm text-gray-300"><span className="text-brand-purple mr-2">✓</span> Galeria Dinâmica</li>
+                      <li className="flex items-center text-sm text-gray-300"><span className="text-brand-purple mr-2">✓</span> Performance Veloz</li>
+                    </ul>
+                    <a href="#contato" className="inline-flex items-center font-bold text-brand-orange-light hover:gap-2 transition-all">
+                      Solicitar orçamento <span className="ml-1">→</span>
+                    </a>
                   </div>
-                  <h3 className="text-2xl font-bold text-white mb-4">UX / UI Design</h3>
-                  <p className="text-gray-400 mb-6 text-sm leading-relaxed">Projetamos interfaces centradas no usuário, garantindo uma navegação intuitiva e inesquecível.</p>
-                  <ul className="space-y-3 mb-8">
-                    <li className="flex items-center text-sm text-gray-300"><span className="text-brand-magenta mr-2">✓</span> Prototipagem em Figma</li>
-                    <li className="flex items-center text-sm text-gray-300"><span className="text-brand-magenta mr-2">✓</span> Jornada do Usuário</li>
-                    <li className="flex items-center text-sm text-gray-300"><span className="text-brand-magenta mr-2">✓</span> Design System</li>
-                  </ul>
-                  <a href="#contato" className="inline-flex items-center font-bold text-brand-orange-light hover:gap-2 transition-all">
-                    Solicitar orçamento <span className="ml-1">→</span>
-                  </a>
                 </div>
-              </div>
-            </div>
-          </div>
-        </section>
 
-           {/* SEÇÃO NOSSOS TRABALHOS */}
-        <section id="trabalhos" className="py-24 bg-dark-bg border-y border-dark-border relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-b from-white/[0.02] via-transparent to-black/40 pointer-events-none"></div>
-
-          <div className="container mx-auto px-4 relative z-10">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">
-                Nosso <span className="text-brand-primary">Portfólio</span>
-              </h2>
-              <p className="text-gray-400">Uma amostra do que podemos construir para você.</p>
-            </div>
-
-            <div className="space-y-20">
-              {/* Projeto 1 */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-                <div className="order-2 lg:order-1 group bg-dark-card border border-white/5 rounded-2xl overflow-hidden shadow-2xl transition-all duration-500 hover:border-brand-primary/30">
-                  <div className="bg-neutral-800/50 px-4 py-3 border-b border-white/5 flex items-center gap-2">
-                    <div className="flex gap-1.5">
-                      <div className="w-3 h-3 rounded-full bg-red-500/50"></div>
-                      <div className="w-3 h-3 rounded-full bg-yellow-500/50"></div>
-                      <div className="w-3 h-3 rounded-full bg-green-500/50"></div>
+                {/* Card 3 */}
+                <div className="group relative bg-dark-card border border-white/5 rounded-2xl p-8 hover:border-brand-magenta/50 transition-all duration-500">
+                  <div className="absolute inset-0 bg-gradient-to-br from-brand-magenta/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
+                  <div className="relative z-10">
+                    <div className="w-14 h-14 bg-brand-magenta/10 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg shadow-brand-magenta/10">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-brand-magenta" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+                      </svg>
                     </div>
-                    <div className="mx-auto bg-black/20 rounded-md px-3 py-1 text-[10px] text-gray-500 font-mono w-1/2 text-center">
-                      faiskapressao.com
-                    </div>
+                    <h3 className="text-2xl font-bold text-white mb-4">UX / UI Design</h3>
+                    <p className="text-gray-400 mb-6 text-sm leading-relaxed">Projetamos interfaces centradas no usuário, garantindo uma navegação intuitiva e inesquecível.</p>
+                    <ul className="space-y-3 mb-8">
+                      <li className="flex items-center text-sm text-gray-300"><span className="text-brand-magenta mr-2">✓</span> Prototipagem em Figma</li>
+                      <li className="flex items-center text-sm text-gray-300"><span className="text-brand-magenta mr-2">✓</span> Jornada do Usuário</li>
+                      <li className="flex items-center text-sm text-gray-300"><span className="text-brand-magenta mr-2">✓</span> Design System</li>
+                    </ul>
+                    <a href="#contato" className="inline-flex items-center font-bold text-brand-orange-light hover:gap-2 transition-all">
+                      Solicitar orçamento <span className="ml-1">→</span>
+                    </a>
                   </div>
-                  <div className="relative overflow-hidden aspect-video">
-                    <img src="images/projeto-raissa.png" alt="Projeto Raissa" className="w-full h-full object-cover object-top group-hover:scale-105 transition-all duration-700" />
-                    <div className="absolute inset-0 bg-brand-purple/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                      <a href="https://faiskapressao.com" target="_blank" rel="noreferrer" className="bg-white text-brand-purple px-6 py-2 rounded-full font-bold">Ver Site Oficial</a>
-                    </div>
-                  </div>
-                </div>
-                <div className="order-1 lg:order-2 space-y-4">
-                  <span className="text-brand-primary font-bold tracking-widest text-xs uppercase">Web Design / Art</span>
-                  <h3 className="text-3xl font-black text-white">Portfólio Artístico: Raíssa Alves</h3>
-                  <p className="text-gray-400 leading-relaxed">Um site minimalista e focado na estética visual, desenvolvido para destacar obras de arte com alta performance e elegância.</p>
-                </div>
-              </div>
-
-              {/* Projeto 2 */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-                <div className="space-y-4">
-                  <span className="text-brand-orange-light font-bold tracking-widest text-xs uppercase">Landing Page / Business</span>
-                  <h3 className="text-3xl font-black text-white">Academia de Muay Thai</h3>
-                  <p className="text-gray-400 leading-relaxed">Página de conversão estratégica criada para captação de novos alunos, com integração de formulários e design agressivo e moderno.</p>
-                </div>
-                <div className="group bg-dark-card border border-white/5 rounded-2xl overflow-hidden shadow-2xl transition-all duration-500 hover:border-brand-orange-light/30">
-                  <div className="bg-neutral-800/50 px-4 py-3 border-b border-white/5 flex items-center gap-2">
-                    <div className="flex gap-1.5">
-                      <div className="w-3 h-3 rounded-full bg-red-500/50"></div>
-                      <div className="w-3 h-3 rounded-full bg-yellow-500/50"></div>
-                      <div className="w-3 h-3 rounded-full bg-green-500/50"></div>
-                    </div>
-                    <div className="mx-auto bg-black/20 rounded-md px-3 py-1 text-[10px] text-gray-500 font-mono w-1/2 text-center">
-                      laura.github.io/muay-thai
-                    </div>
-                  </div>
-                  <div className="relative overflow-hidden aspect-video">
-                    <img src="images/muay-thai-thumb.png" alt="Muay Thai" className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700" />
-                    <div className="absolute inset-0 bg-brand-orange-dark/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                      <a href="https://laurafercordeiro.github.io/Muay-Thai/index.html" target="_blank" rel="noreferrer" className="bg-white text-brand-orange-dark px-6 py-2 rounded-full font-bold">Ver Projeto</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Projeto 3 (Vídeo) */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-                <div className="order-2 lg:order-1 group bg-dark-card border border-white/5 rounded-2xl overflow-hidden shadow-2xl transition-all duration-500">
-                  <div className="bg-neutral-800/80 px-4 py-3 flex items-center justify-between border-b border-white/5">
-                    <span className="text-[10px] text-gray-400 font-bold tracking-widest uppercase">Video Showcase</span>
-                    <div className="flex gap-1">
-                      <div className="w-2 h-2 rounded-full bg-white/20"></div>
-                      <div className="w-2 h-2 rounded-full bg-white/20"></div>
-                    </div>
-                  </div>
-                  <div className="relative aspect-video bg-black">
-                    <video className="w-full h-full object-cover" controls autoPlay muted loop>
-                      <source src="/video/video.mp4" type="video/mp4" />
-                    </video>
-                  </div>
-                </div>
-                <div className="order-1 lg:order-2 space-y-4">
-                  <span className="text-brand-magenta font-bold tracking-widest text-xs uppercase">E-Commerce / Full Stack</span>
-                  <h3 className="text-3xl font-black text-white">Site Institucional: Tearti</h3>
-                  <p className="text-gray-400 leading-relaxed">Demonstração de uma plataforma completa de comércio eletrônico, com sistema de catálogo e interface focada na experiência de compra.</p>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
+
+          {/* SEÇÃO NOSSOS TRABALHOS */}
+          <section id="trabalhos" className="py-24 bg-dark-bg border-y border-dark-border relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-b from-white/[0.02] via-transparent to-black/40 pointer-events-none"></div>
+
+            <div className="container mx-auto px-4 relative z-10">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">
+                  Nosso <span className="text-brand-primary">Portfólio</span>
+                </h2>
+                <p className="text-gray-400">Uma amostra do que podemos construir para você.</p>
+              </div>
+
+              <div className="space-y-20">
+                {/* Projeto 1 */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+                  <div className="order-2 lg:order-1 group bg-dark-card border border-white/5 rounded-2xl overflow-hidden shadow-2xl transition-all duration-500 hover:border-brand-primary/30">
+                    <div className="bg-neutral-800/50 px-4 py-3 border-b border-white/5 flex items-center gap-2">
+                      <div className="flex gap-1.5">
+                        <div className="w-3 h-3 rounded-full bg-red-500/50"></div>
+                        <div className="w-3 h-3 rounded-full bg-yellow-500/50"></div>
+                        <div className="w-3 h-3 rounded-full bg-green-500/50"></div>
+                      </div>
+                      <div className="mx-auto bg-black/20 rounded-md px-3 py-1 text-[10px] text-gray-500 font-mono w-1/2 text-center">
+                        faiskapressao.com
+                      </div>
+                    </div>
+                    <div className="relative overflow-hidden aspect-video">
+                      <img src="images/projeto-raissa.png" alt="Projeto Raissa" className="w-full h-full object-cover object-top group-hover:scale-105 transition-all duration-700" />
+                      <div className="absolute inset-0 bg-brand-purple/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <a href="https://faiskapressao.com" target="_blank" rel="noreferrer" className="bg-white text-brand-purple px-6 py-2 rounded-full font-bold">Ver Site Oficial</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="order-1 lg:order-2 space-y-4">
+                    <span className="text-brand-primary font-bold tracking-widest text-xs uppercase">Web Design / Art</span>
+                    <h3 className="text-3xl font-black text-white">Portfólio Artístico: Raíssa Alves</h3>
+                    <p className="text-gray-400 leading-relaxed">Um site minimalista e focado na estética visual, desenvolvido para destacar obras de arte com alta performance e elegância.</p>
+                  </div>
+                </div>
+
+                {/* Projeto 2 */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+                  <div className="space-y-4">
+                    <span className="text-brand-orange-light font-bold tracking-widest text-xs uppercase">Landing Page / Business</span>
+                    <h3 className="text-3xl font-black text-white">Academia de Muay Thai</h3>
+                    <p className="text-gray-400 leading-relaxed">Página de conversão estratégica criada para captação de novos alunos, com integração de formulários e design agressivo e moderno.</p>
+                  </div>
+                  <div className="group bg-dark-card border border-white/5 rounded-2xl overflow-hidden shadow-2xl transition-all duration-500 hover:border-brand-orange-light/30">
+                    <div className="bg-neutral-800/50 px-4 py-3 border-b border-white/5 flex items-center gap-2">
+                      <div className="flex gap-1.5">
+                        <div className="w-3 h-3 rounded-full bg-red-500/50"></div>
+                        <div className="w-3 h-3 rounded-full bg-yellow-500/50"></div>
+                        <div className="w-3 h-3 rounded-full bg-green-500/50"></div>
+                      </div>
+                      <div className="mx-auto bg-black/20 rounded-md px-3 py-1 text-[10px] text-gray-500 font-mono w-1/2 text-center">
+                        laura.github.io/muay-thai
+                      </div>
+                    </div>
+                    <div className="relative overflow-hidden aspect-video">
+                      <img src="images/muay-thai-thumb.png" alt="Muay Thai" className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700" />
+                      <div className="absolute inset-0 bg-brand-orange-dark/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <a href="https://laurafercordeiro.github.io/Muay-Thai/index.html" target="_blank" rel="noreferrer" className="bg-white text-brand-orange-dark px-6 py-2 rounded-full font-bold">Ver Projeto</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Projeto 3 (Vídeo) */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+                  <div className="order-2 lg:order-1 group bg-dark-card border border-white/5 rounded-2xl overflow-hidden shadow-2xl transition-all duration-500">
+                    <div className="bg-neutral-800/80 px-4 py-3 flex items-center justify-between border-b border-white/5">
+                      <span className="text-[10px] text-gray-400 font-bold tracking-widest uppercase">Video Showcase</span>
+                      <div className="flex gap-1">
+                        <div className="w-2 h-2 rounded-full bg-white/20"></div>
+                        <div className="w-2 h-2 rounded-full bg-white/20"></div>
+                      </div>
+                    </div>
+                    <div className="relative aspect-video bg-black">
+                      <video className="w-full h-full object-cover" controls autoPlay muted loop>
+                        <source src="/video/video.mp4" type="video/mp4" />
+                      </video>
+                    </div>
+                  </div>
+                  <div className="order-1 lg:order-2 space-y-4">
+                    <span className="text-brand-magenta font-bold tracking-widest text-xs uppercase">E-Commerce / Full Stack</span>
+                    <h3 className="text-3xl font-black text-white">Site Institucional: Tearti</h3>
+                    <p className="text-gray-400 leading-relaxed">Demonstração de uma plataforma completa de comércio eletrônico, com sistema de catálogo e interface focada na experiência de compra.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
 
 
           {/* SEÇÃO DUVIDAS */}
-          <section id="duvidas" className="py-24 bg-dark-bg">
+          <section id="duvidas" className="py-12 lg:py-24 bg-dark-card bg-gradient-to-br from-brand-purple/10 via-transparent to-brand-orange-light/10">
             <div className="container mx-auto px-4">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-                <div className="space-y-8">
-                  <h2 className="text-5xl font-black text-white leading-none tracking-tighter">
-                    Perguntas <span className="text-brand-primary">Frequentes</span>
-                  </h2>
-                  <div className="flex flex-wrap gap-3">
-                    {categorias.map(cat => (
-                      <button
-                        key={cat}
-                        onClick={() => {
-                          setCategoriaAtiva(cat);
-                          setPerguntaAberta(null);
-                        }}
-                        className={`px-6 py-2.5 rounded-full font-bold text-sm transition-all ${
-                          categoriaAtiva === cat 
-                            ? 'bg-brand-primary text-white' 
-                            : 'bg-white/5 text-gray-400 border border-white/10 hover:bg-white/10'
-                        }`}
-                      >
-                        {cat}
-                      </button>
-                    ))}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start">
+
+                {/* Coluna da Esquerda: Título, Texto e Botões */}
+                <div className="space-y-6 lg:space-y-10">
+                  <div className="space-y-4">
+                    <h2 className="text-4xl lg:text-6xl font-black text-white leading-none tracking-tighter">
+                      Perguntas <span className="text-brand-primary">Frequentes</span>
+                    </h2>
+
+                    <p className="text-white/70 text-sm lg:text-lg leading-relaxed max-w-lg">
+                      Sabemos que contratar um serviço digital gera dúvidas. Por isso, reunimos aqui as perguntas mais comuns para deixar tudo claro antes de começarmos.
+                    </p>
+                  </div>
+
+                  {/* Grid de Botões */}
+                  <div className="grid grid-cols-12 gap-3 w-full lg:max-w-md">
+                    {categorias.map((cat, index) => {
+                      const isWide = index === 1 || index === 2;
+                      const colSpan = isWide ? 'col-span-7' : 'col-span-5';
+
+                      return (
+                        <button
+                          key={cat}
+                          onClick={() => {
+                            setCategoriaAtiva(cat);
+                            setPerguntaAberta(null);
+                          }}
+                          className={`${colSpan} py-3 lg:py-4 px-4 rounded-2xl font-bold text-xs lg:text-sm transition-all border ${categoriaAtiva === cat
+                              ? 'bg-brand-primary text-white border-brand-primary'
+                              : 'bg-white/5 text-gray-400 border-white/10 hover:bg-white/10'
+                            }`}
+                        >
+                          {cat}
+                        </button>
+                      );
+                    })}
                   </div>
                 </div>
 
-                <div className="space-y-4">
-                  {dadosFaq[categoriaAtiva].map((item, index) => (
-                    <div key={index} className="group bg-white/5 border border-white/10 rounded-3xl overflow-hidden">
-                      <button 
-                        onClick={() => setPerguntaAberta(perguntaAberta === index ? null : index)}
-                        className="w-full p-6 flex justify-between items-center text-left"
+                {/* Coluna da Direita: Accordion / Perguntas */}
+                <div className="space-y-3 lg:space-y-4">
+                  {dadosFaq[categoriaAtiva].map((item, index) => {
+                    const isOpen = perguntaAberta === index;
+
+                    return (
+                      <div
+                        key={index}
+                        // MUDANÇA AQUI: A cor de fundo e o hover agora ficam no container inteiro
+                        className={`group rounded-2xl lg:rounded-3xl overflow-hidden border transition-all duration-300 ${isOpen
+                            ? 'bg-white/10 border-white/20 shadow-lg' // Se aberto: cor de fundo ativa fixa
+                            : 'bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20' // Se fechado: cor normal + hover
+                          }`}
                       >
-                        <span className="text-white font-medium md:text-lg pr-4">{item.q}</span>
-                        <div className={`w-8 h-8 rounded-full border border-white/10 flex items-center justify-center transition-all ${perguntaAberta === index ? 'rotate-180 bg-brand-primary' : ''}`}>
-                           <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M19 9l-7 7-7-7" />
-                          </svg>
+                        <button
+                          onClick={() => setPerguntaAberta(isOpen ? null : index)}
+                          // REMOVI O HOVER DAQUI para não dar conflito
+                          className="w-full p-5 lg:p-8 flex justify-between items-center text-left transition-colors"
+                        >
+                          <span className="text-white font-medium text-sm lg:text-xl pr-4 leading-tight">
+                            {item.q}
+                          </span>
+
+                          <div className={`shrink-0 w-8 h-8 lg:w-10 lg:h-10 rounded-full border border-white/10 flex items-center justify-center transition-all duration-300 ${isOpen ? 'rotate-180 bg-brand-primary border-brand-primary' : ''}`}>
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 lg:h-5 lg:w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M19 9l-7 7-7-7" />
+                            </svg>
+                          </div>
+                        </button>
+
+                        {/* Wrapper da Animação */}
+                        <div
+                          className={`grid transition-[grid-template-rows,opacity] duration-500 ease-in-out ${isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
+                            }`}
+                        >
+                          <div className="overflow-hidden">
+                            {/* O texto herda o bg do pai, então fica uniforme */}
+                            <div className="px-5 pb-5 lg:px-8 lg:pb-8 text-gray-400 text-xs lg:text-lg leading-relaxed">
+                              {item.a}
+                            </div>
+                          </div>
                         </div>
-                      </button>
-                      
-                      {perguntaAberta === index && (
-                        <div className="px-6 pb-6 text-gray-400 leading-relaxed">
-                          {item.a}
-                        </div>
-                      )}
-                    </div>
-                  ))}
+
+                      </div>
+                    );
+                  })}
                 </div>
+
               </div>
             </div>
           </section>

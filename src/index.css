@@ -34,9 +34,6 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #f48131;
 }
-html {
-  scroll-behavior: auto !important; /* IMPORTANTE: Desliga a suavidade nativa */
-}
 
 html, body {
   height: 100%; /* Ajuda o Lenis a calcular a altura correta */

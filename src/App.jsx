@@ -106,31 +106,31 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-dark-bg text-white font-sans selection:bg-brand-primary selection:text-white">
-      {/* CABEÇALHO */}
-      <header className="sticky top-0 z-50 bg-dark-bg/70 backdrop-blur-xl border-b border-white/5">
-        <div className="container mx-auto flex justify-between items-center p-4">
-          <a href="#" className="flex items-center gap-3 group">
-            <img
-              src="/images/logo.png"
-              alt="Símbolo AmbaTech"
-              className="h-10 w-auto group-hover:rotate-12 transition-transform"
-            />
-            <span className="flex text-2xl font-black tracking-tighter italic">
-              <span className="text-brand-orange-light">AMBA</span>
-              <span className="text-brand-purple">TECH</span>
-            </span>
-          </a>
+{/* CABEÇALHO */}
+<header className="fixed top-0 left-0 w-full z-50 bg-dark-bg/60 backdrop-blur-lg border-b border-white/10">
+  <div className="container mx-auto flex justify-between items-center p-4">
+    <a href="#" className="flex items-center gap-3 group">
+      <img
+        src="/images/logo.png"
+        alt="Símbolo AmbaTech"
+        className="h-10 w-auto group-hover:rotate-12 transition-transform"
+      />
+      <span className="flex text-2xl font-black tracking-tighter italic">
+        <span className="text-brand-orange-light">AMBA</span>
+        <span className="text-brand-purple">TECH</span>
+      </span>
+    </a>
 
-          {/* Nav Desktop */}
-          <nav className="hidden md:flex space-x-8 items-center">
-            <a href="#inicio" className="text-sm font-medium hover:text-brand-primary transition-colors">Início</a>
-            <a href="#servicos" className="text-sm font-medium hover:text-brand-primary transition-colors">Serviços</a>
-            <a href="#trabalhos" className="text-sm font-medium hover:text-brand-primary transition-colors">Nossos Trabalhos</a>
-            <a href="#contato"
-              className="bg-brand-primary hover:bg-brand-orange-dark text-white text-sm font-bold px-5 py-2.5 rounded-full shadow-lg shadow-brand-primary/20 transition-all hover:-translate-y-0.5">
-              Iniciar Projeto
-            </a>
-          </nav>
+    {/* Nav Desktop */}
+    <nav className="hidden md:flex space-x-8 items-center">
+      <a href="#inicio" className="text-sm font-medium hover:text-brand-primary transition-colors">Início</a>
+      <a href="#servicos" className="text-sm font-medium hover:text-brand-primary transition-colors">Serviços</a>
+      <a href="#trabalhos" className="text-sm font-medium hover:text-brand-primary transition-colors">Nossos Trabalhos</a>
+      <a href="#contato"
+        className="bg-brand-primary hover:bg-brand-orange-dark text-white text-sm font-bold px-5 py-2.5 rounded-full shadow-lg shadow-brand-primary/20 transition-all hover:-translate-y-0.5">
+        Iniciar Projeto
+      </a>
+    </nav>
 
           {/* Botão Mobile */}
           <button

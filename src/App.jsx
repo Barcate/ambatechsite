@@ -107,8 +107,9 @@ export default function App() {
   return (
     <div className="min-h-screen bg-dark-bg text-white font-sans selection:bg-brand-primary selection:text-white">
 {/* CABEÇALHO */}
-<header className="fixed top-0 left-0 w-full z-50 bg-dark-bg/60 backdrop-blur-lg border-b border-white/10">
-  <div className="container mx-auto flex justify-between items-center p-4">
+{/* CABEÇALHO */}
+<header className="fixed top-0 left-0 w-full z-50 bg-dark-bg/60 backdrop-blur-xl border-b border-white/10 transition-all duration-300">
+  <div className="container mx-auto flex justify-between items-center p-4"> {/* Removi as classes duplicadas aqui */}
     <a href="#" className="flex items-center gap-3 group">
       <img
         src="/images/logo.png"
@@ -132,31 +133,31 @@ export default function App() {
       </a>
     </nav>
 
-          {/* Botão Mobile */}
-          <button
-            onClick={() => setIsOpen(!isMenuOpen)}
-            className="md:hidden p-2 text-white hover:bg-white/10 rounded-lg"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              {isMenuOpen ? (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
-              )}
-            </svg>
-          </button>
-        </div>
-
-        {/* Menu Mobile */}
-        {isMenuOpen && (
-          <div className="md:hidden flex flex-col absolute top-full left-0 w-full bg-dark-bg border-t border-dark-border p-4 space-y-4 shadow-2xl">
-            <a href="#inicio" onClick={closeMenu} className="block hover:text-brand-primary">Início</a>
-            <a href="#servicos" onClick={closeMenu} className="block hover:text-brand-primary">Serviços</a>
-            <a href="#trabalhos" onClick={closeMenu} className="block hover:text-brand-primary">Nossos Trabalhos</a>
-            <a href="#contato" onClick={closeMenu} className="block text-brand-primary font-bold">Entre em Contato</a>
-          </div>
+    {/* Botão Mobile */}
+    <button
+      onClick={() => setIsOpen(!isMenuOpen)}
+      className="md:hidden p-2 text-white hover:bg-white/10 rounded-lg"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        {isMenuOpen ? (
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+        ) : (
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
         )}
-      </header>
+      </svg>
+    </button>
+  </div>
+
+  {/* Menu Mobile - Ajustado para Fixed também */}
+  {isMenuOpen && (
+    <div className="fixed top-[72px] left-0 w-full bg-dark-bg/95 backdrop-blur-2xl border-t border-white/10 p-4 space-y-4 shadow-2xl md:hidden">
+      <a href="#inicio" onClick={closeMenu} className="block hover:text-brand-primary">Início</a>
+      <a href="#servicos" onClick={closeMenu} className="block hover:text-brand-primary">Serviços</a>
+      <a href="#trabalhos" onClick={closeMenu} className="block hover:text-brand-primary">Nossos Trabalhos</a>
+      <a href="#contato" onClick={closeMenu} className="block text-brand-primary font-bold">Entre em Contato</a>
+    </div>
+  )}
+</header>
 
       <div ref={mainContainer}>
 
@@ -168,9 +169,9 @@ export default function App() {
           /></div>
         </div>
 
-        <main>
+        <main className='pt-20'>
           {/* SEÇÃO INÍCIO (HERO) */}
-          <section ref={heroContentRef} id="inicio" className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+          <section ref={heroContentRef} id="inicio" className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-grid-pattern">
             <div className="absolute top-1/4 -left-20 w-96 h-96 bg-brand-primary/10 blur-[120px] rounded-full"></div>
             <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-brand-purple/30 blur-[120px] rounded-full"></div>
 
@@ -404,7 +405,7 @@ export default function App() {
                             setCategoriaAtiva(cat);
                             setPerguntaAberta(null);
                           }}
-                          className={`${colSpan} py-3 lg:py-4 px-4 rounded-2xl font-bold text-xs lg:text-sm transition-all border ${categoriaAtiva === cat
+                          className={`${colSpan} py-3 lg:py-4 px-4 rounded-2xl font-bold text-xs lg:text-lg transition-all border ${categoriaAtiva === cat
                               ? 'bg-brand-primary text-white border-brand-primary'
                               : 'bg-white/5 text-gray-400 border-white/10 hover:bg-white/10'
                             }`}
@@ -470,32 +471,44 @@ export default function App() {
 
           {/* SEÇÃO CONTATO */}
           <section id="contato" className="py-24 relative overflow-hidden">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-brand-primary/10 blur-[100px] rounded-full pointer-events-none"></div>
             <div className="container mx-auto px-4 relative z-10">
               <div className="max-w-3xl mx-auto text-center mb-12">
                 <h2 className="text-4xl md:text-5xl font-black text-white mb-4">
                   Vamos <span className="text-brand-primary">Conversar?</span>
                 </h2>
+                <p className="text-gray-400 text-lg">
+                        Estamos prontos para ouvir sobre sua próxima grande ideia. <br className="hidden md:block" /> 
+                        Preencha o formulário e retornaremos em breve.
+                    </p>
               </div>
 
               <div className="max-w-2xl mx-auto">
-                <form className="bg-white/5 backdrop-blur-xl border border-white/5 p-8 md:p-12 rounded-[2rem]">
+                <form className="bg-dark-card/40 backdrop-blur-xl border border-white/5 p-8 md:p-12 rounded-[2rem] shadow-2xl relative">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <div className="space-y-2">
                       <label className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Nome</label>
-                      <input type="text" className="w-full bg-black/20 border border-white/10 rounded-2xl p-4 text-white focus:border-brand-primary outline-none" placeholder="Seu nome" />
+                      <input type="text" className="w-full bg-black/20 border border-white/10 rounded-2xl p-4 text-white placeholder:text-gray-700 focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary outline-none transition-all duration-300 hover:border-white/20" placeholder="Seu nome" />
                     </div>
                     <div className="space-y-2">
                       <label className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Email</label>
-                      <input type="email" className="w-full bg-black/20 border border-white/10 rounded-2xl p-4 text-white focus:border-brand-primary outline-none" placeholder="seu@email.com" />
+                      <input type="email" className="w-full bg-black/20 border border-white/10 rounded-2xl p-4 text-white placeholder:text-gray-700 focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary outline-none transition-all duration-300 hover:border-white/20" placeholder="seu@email.com" />
                     </div>
                   </div>
                   <div className="space-y-2 mb-8">
                     <label className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Mensagem</label>
-                    <textarea rows="4" className="w-full bg-black/20 border border-white/10 rounded-2xl p-4 text-white focus:border-brand-primary outline-none" placeholder="Como podemos ajudar?"></textarea>
+                    <textarea rows="4" className="w-full bg-black/20 border border-white/10 rounded-2xl p-4 text-white placeholder:text-gray-700 focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary outline-none transition-all duration-300 hover:border-white/20" placeholder="Como podemos ajudar?"></textarea>
                   </div>
-                  <button className="w-full bg-brand-primary text-white font-black py-4 rounded-2xl hover:bg-brand-orange-dark transition-colors">
-                    Enviar Mensagem
-                  </button>
+                  <div className="relative group">
+                            <div className="absolute -inset-0.5 bg-gradient-to-r from-brand-orange-light to-brand-primary rounded-2xl blur opacity-20 group-hover:opacity-50 transition duration-500"></div>
+                            <button type="submit" 
+                                className="relative w-full bg-gradient-to-r from-brand-orange-light to-brand-primary text-white font-black py-5 rounded-2xl text-lg tracking-wide shadow-xl transition-all duration-300 transform group-hover:scale-[1.01] active:scale-[0.98]">
+                                Enviar Mensagem
+                            </button>
+                        </div>
+                   <p className="text-center text-gray-600 text-[10px] mt-6 uppercase tracking-widest font-medium">
+                            Resposta em menos de 24 horas úteis
+                    </p>
                 </form>
               </div>
             </div>

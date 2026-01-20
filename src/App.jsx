@@ -513,9 +513,14 @@ export default function App() {
 
           {/* SEÇÃO CONTATO */}
          <section id="contato" className="py-24 relative">
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-brand-primary/10 blur-[100px] rounded-full pointer-events-none"></div>
             <div className="container mx-auto px-4 relative z-10">
               <div className="max-w-3xl mx-auto text-center mb-12">
                 <h2 className="text-4xl md:text-5xl font-black mb-4">Vamos <span className="text-brand-primary">Conversar?</span></h2>
+                <p class="text-gray-400 text-lg">
+                        Estamos prontos para ouvir sobre sua próxima grande ideia. <br class="hidden md:block" /> 
+                        Preencha o formulário e retornaremos em breve.
+                </p>
               </div>
 
               <div className="max-w-2xl mx-auto">
@@ -533,7 +538,7 @@ export default function App() {
                       name="name" // Adicionado
                       type="text" 
                       required
-                      className="w-full bg-black/20 border border-white/10 rounded-2xl p-4 text-white focus:border-brand-primary outline-none transition-all" 
+                      className="w-full bg-black/20 border border-white/10 rounded-2xl p-4 text-white placeholder:text-gray-700 focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary outline-none transition-all duration-300 hover:border-white/20" 
                       placeholder="Seu nome" 
                     />
                   </div>
@@ -543,7 +548,7 @@ export default function App() {
                       name="email" // Adicionado
                       type="email" 
                       required
-                      className="w-full bg-black/20 border border-white/10 rounded-2xl p-4 text-white focus:border-brand-primary outline-none transition-all" 
+                      className="w-full bg-black/20 border border-white/10 rounded-2xl p-4 text-white placeholder:text-gray-700 focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary outline-none transition-all duration-300 hover:border-white/20" 
                       placeholder="seu@email.com" 
                     />
                   </div>
@@ -555,17 +560,23 @@ export default function App() {
                     name="message" // Adicionado
                     required
                     rows="4"
-                    className="w-full bg-black/20 border border-white/10 rounded-2xl p-4 text-white focus:border-brand-primary outline-none transition-all" 
+                    className="w-full bg-black/20 border border-white/10 rounded-2xl p-4 text-white placeholder:text-gray-700 focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary outline-none transition-all duration-300 hover:border-white/20" 
                     placeholder="Como podemos ajudar?"
                   ></textarea>
                 </div>
-
-                <button 
-                  type="submit" 
-                  className="w-full bg-brand-primary hover:bg-brand-orange-dark text-white font-bold py-4 rounded-2xl shadow-xl transition-all hover:scale-[1.02]"
-                >
-                  Enviar Mensagem
-                </button>
+                <div class="relative group">
+                  <div class="absolute -inset-0.5 bg-gradient-to-r from-brand-orange-light to-brand-primary rounded-2xl blur opacity-20 group-hover:opacity-50 transition duration-500"></div>
+                  <button 
+                    type="submit" 
+                    className="relative w-full bg-gradient-to-r from-brand-orange-light to-brand-primary text-white font-black py-5 rounded-2xl text-lg tracking-wide shadow-xl transition-all duration-300 transform group-hover:scale-[1.01] active:scale-[0.98]"
+                  >
+                    Enviar Mensagem
+                  </button>
+                  
+                </div>
+                <p class="text-center text-gray-600 text-[10px] mt-6 uppercase tracking-widest font-medium">
+                            Resposta em menos de 24 horas úteis
+                        </p>
               </form>
               </div>
             </div>

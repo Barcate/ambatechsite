@@ -619,7 +619,7 @@ export default function App() {
 
         <footer className="bg-black border-t border-white/10 py-8">
           <div className="container mx-auto text-center">
-            <p className="text-gray-500">&copy; 2025 AmbaTech. Todos os direitos reservados.</p>
+            <p className="text-gray-500">&copy; 2025 AmbaTech - CNPJ: 65.471.322/0001-64. Todos os direitos reservados.</p>
           </div>
         </footer>
 

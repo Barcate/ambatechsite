@@ -4,7 +4,8 @@
 
 @font-face {
   font-family: FLogo;
-  src: url(/font/Horizon.otf);
+  src: url(/font/Horizon.otf) format('opentype');
+  font-display: swap;
 }
 .FLogo{
   font-family: FLogo;

@@ -7,18 +7,103 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-DL3VYZEYQJ');
     </script>
+
+    <!-- Essenciais -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AmbaTech | Inovação & Performance</title>
 
+    <!-- SEO Básico -->
+    <title>AmbaTech | Landing Pages, Portfólios e UI/UX Design</title>
+    <meta name="description" content="A AmbaTech desenvolve landing pages de alta conversão, portfólios e UI/UX design. Design de ponta e tecnologia robusta para acelerar seu negócio digital." />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://ambatech.com.br/" />
+
+    <!-- Open Graph (Facebook, WhatsApp, LinkedIn) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://ambatech.com.br/" />
+    <meta property="og:title" content="AmbaTech | Landing Pages, Portfólios e UI/UX Design" />
+    <meta property="og:description" content="A AmbaTech desenvolve landing pages de alta conversão, portfólios e UI/UX design. Design de ponta e tecnologia robusta para acelerar seu negócio digital." />
+    <meta property="og:image" content="https://ambatech.com.br/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:site_name" content="AmbaTech" />
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://ambatech.com.br/" />
+    <meta name="twitter:title" content="AmbaTech | Landing Pages, Portfólios e UI/UX Design" />
+    <meta name="twitter:description" content="A AmbaTech desenvolve landing pages de alta conversão, portfólios e UI/UX design. Design de ponta e tecnologia robusta para acelerar seu negócio digital." />
+    <meta name="twitter:image" content="https://ambatech.com.br/og-image.jpg" />
+
+    <!-- Performance: preconnect para fontes externas -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Fonte local: preload para evitar FOUT -->
+    <link rel="preload" href="/font/Horizon.otf" as="font" type="font/otf" crossorigin />
+
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
 
-    <link rel="icon" href="/images/logorecortada.png" /> 
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/images/logorecortada.png" />
+    <link rel="apple-touch-icon" href="/images/logorecortada.png" />
+
+    <!-- Dados Estruturados: Organization + WebSite -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://ambatech.com.br/#organization",
+          "name": "AmbaTech",
+          "url": "https://ambatech.com.br",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://ambatech.com.br/images/logo.png"
+          },
+          "description": "Empresa de tecnologia especializada em landing pages de alta conversão, portfólios profissionais e projetos de UI/UX design.",
+          "inLanguage": "pt-BR",
+          "taxID": "65.471.322/0001-64",
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "customer support",
+            "availableLanguage": "Portuguese"
+          },
+          "sameAs": []
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://ambatech.com.br/#website",
+          "url": "https://ambatech.com.br",
+          "name": "AmbaTech",
+          "description": "Landing pages, portfólios profissionais e UI/UX design com tecnologia robusta e performance.",
+          "publisher": {
+            "@id": "https://ambatech.com.br/#organization"
+          },
+          "inLanguage": "pt-BR"
+        },
+        {
+          "@type": "WebPage",
+          "@id": "https://ambatech.com.br/#webpage",
+          "url": "https://ambatech.com.br",
+          "name": "AmbaTech | Landing Pages, Portfólios e UI/UX Design",
+          "description": "A AmbaTech cria landing pages de alta conversão, portfólios profissionais e projetos de UI/UX design.",
+          "isPartOf": {
+            "@id": "https://ambatech.com.br/#website"
+          },
+          "about": {
+            "@id": "https://ambatech.com.br/#organization"
+          },
+          "inLanguage": "pt-BR"
+        }
+      ]
+    }
+    </script>
   </head>
 
   <body class="bg-[#050505] text-gray-300 font-sans antialiased">

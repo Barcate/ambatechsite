@@ -195,6 +195,8 @@ export default function App() {
           {/* Botão Mobile */}
           <button
             onClick={() => setIsOpen(!isMenuOpen)}
+            aria-label={isMenuOpen ? 'Fechar menu' : 'Abrir menu'}
+            aria-expanded={isMenuOpen}
             className="md:hidden p-2 text-white hover:bg-white/10 rounded-lg"
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -383,7 +385,7 @@ export default function App() {
                       </div>
                     </div>
                     <div className="relative overflow-hidden aspect-video">
-                      <img src="images/projeto-raissa.png" alt="Projeto Raissa" className="w-full h-full object-cover object-top group-hover:scale-105 transition-all duration-700" />
+                      <img src="images/projeto-raissa.png" alt="Captura de tela do site Portfólio Artístico Raíssa Alves, desenvolvido pela AmbaTech" loading="lazy" width="800" height="450" className="w-full h-full object-cover object-top group-hover:scale-105 transition-all duration-700" />
                       <div className="absolute inset-0 bg-brand-purple/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                         <a href="https://faiskapressao.com" target="_blank" rel="noreferrer" className="bg-white text-brand-purple px-6 py-2 rounded-full font-bold">Ver Site Oficial</a>
                       </div>
@@ -415,7 +417,7 @@ export default function App() {
                       </div>
                     </div>
                     <div className="relative overflow-hidden aspect-video">
-                      <img src="images/LauraPortfolio.png" alt="Portfólio Imersivo Laura" className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700" />
+                      <img src="images/LauraPortfolio.png" alt="Captura de tela do site Portfólio Imersivo 3D Laura Cordeiro, desenvolvido pela AmbaTech" loading="lazy" width="800" height="450" className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700" />
                       <div className="absolute inset-0 bg-brand-orange-dark/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                         <a href="https://lauracordeiro-portfolio.vercel.app" target="_blank" rel="noreferrer" className="bg-white text-brand-orange-dark px-6 py-2 rounded-full font-bold">Ver Projeto</a>
                       </div>
@@ -546,12 +548,12 @@ export default function App() {
 
           {/* SEÇÃO CONTATO */}
           <section id="contato" className="py-24 relative">
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-brand-primary/10 blur-[100px] rounded-full pointer-events-none"></div>
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-brand-primary/10 blur-[100px] rounded-full pointer-events-none"></div>
             <div className="container mx-auto px-4 relative z-10">
               <div className="max-w-3xl mx-auto text-center mb-12">
                 <h2 className="text-4xl md:text-5xl font-black mb-4">Vamos <span className="text-brand-primary">Conversar?</span></h2>
-                <p class="text-gray-400 text-lg">
-                  Estamos prontos para ouvir sobre sua próxima grande ideia. <br class="hidden md:block" />
+                <p className="text-gray-400 text-lg">
+                  Estamos prontos para ouvir sobre sua próxima grande ideia. <br className="hidden md:block" />
                   Preencha o formulário e retornaremos em breve.
                 </p>
               </div>
@@ -566,9 +568,10 @@ export default function App() {
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <div className="space-y-2">
-                      <label className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Nome</label>
+                      <label htmlFor="contact-name" className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Nome</label>
                       <input
-                        name="name" // Adicionado
+                        id="contact-name"
+                        name="name"
                         type="text"
                         required
                         className="w-full bg-black/20 border border-white/10 rounded-2xl p-4 text-white placeholder:text-gray-700 focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary outline-none transition-all duration-300 hover:border-white/20"
@@ -576,9 +579,10 @@ export default function App() {
                       />
                     </div>
                     <div className="space-y-2">
-                      <label className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Email</label>
+                      <label htmlFor="contact-email" className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Email</label>
                       <input
-                        name="email" // Adicionado
+                        id="contact-email"
+                        name="email"
                         type="email"
                         required
                         className="w-full bg-black/20 border border-white/10 rounded-2xl p-4 text-white placeholder:text-gray-700 focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary outline-none transition-all duration-300 hover:border-white/20"
@@ -588,17 +592,18 @@ export default function App() {
                   </div>
 
                   <div className="space-y-2 mb-8">
-                    <label className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Mensagem</label>
+                    <label htmlFor="contact-message" className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Mensagem</label>
                     <textarea
-                      name="message" // Adicionado
+                      id="contact-message"
+                      name="message"
                       required
                       rows="4"
                       className="w-full bg-black/20 border border-white/10 rounded-2xl p-4 text-white placeholder:text-gray-700 focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary outline-none transition-all duration-300 hover:border-white/20"
                       placeholder="Como podemos ajudar?"
                     ></textarea>
                   </div>
-                  <div class="relative group">
-                    <div class="absolute -inset-0.5 bg-gradient-to-r from-brand-orange-light to-brand-primary rounded-2xl blur opacity-20 group-hover:opacity-50 transition duration-500"></div>
+                  <div className="relative group">
+                    <div className="absolute -inset-0.5 bg-gradient-to-r from-brand-orange-light to-brand-primary rounded-2xl blur opacity-20 group-hover:opacity-50 transition duration-500"></div>
                     <button
                       type="submit"
                       className="relative w-full bg-gradient-to-r from-brand-orange-light to-brand-primary text-white font-black py-5 rounded-2xl text-lg tracking-wide shadow-xl transition-all duration-300 transform group-hover:scale-[1.01] active:scale-[0.98]"
@@ -607,7 +612,7 @@ export default function App() {
                     </button>
 
                   </div>
-                  <p class="text-center text-gray-600 text-[10px] mt-6 uppercase tracking-widest font-medium">
+                  <p className="text-center text-gray-600 text-[10px] mt-6 uppercase tracking-widest font-medium">
                     Resposta em menos de 24 horas úteis
                   </p>
                 </form>

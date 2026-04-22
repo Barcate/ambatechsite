@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ambatech.com.br/sitemap.xml
+Sitemap: https://ambatech.vercel.app/sitemap.xml
